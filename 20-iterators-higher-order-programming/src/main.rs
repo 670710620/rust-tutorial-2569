@@ -1,77 +1,68 @@
 // ========================================
-//            key 1: iterator
+//            key 1: iter()
 // ========================================
 fn key_concept_1() {
-    let numbers = [1, 2, 3];
+    let numbers = vec![1, 2, 3];
 
-    // Create an iterator for the array
-    let mut iter = numbers.iter();
-
-    // Get the next element
-    println!("{:?}", iter.next()); //Some(1)
-    println!("{:?}", iter.next()); //Some(2)
-    println!("{:?}", iter.next()); //Some(3)
-    println!("{:?}", iter.next()); //None
+    for number in numbers.iter() {
+        println!("{}", number);
+    }
 }
 
 // ========================================
-//             key 2: .map
+//             key 2: map()
 // ========================================
 fn key_concept_2() {
-    let numbers = [1, 2, 3];
+    let numbers = vec![1, 2, 3];
 
-    // Multiply every element by 2
-    let result: Vec<i32> = numbers
-        // Create an iterator
-        .iter()
-        // Transform each element by multiplying it by 2
-        .map(|x| x * 2)
-        // Collect the results into a Vec<i32>
-        .collect();
+    let doubled = numbers.iter().map(|number| number * 2);
 
-    println!("{:?}", result);
+    for number in doubled {
+        println!("{}", number);
+    }
 }
 
 // ========================================
-//            key 3: .filter
+//            key 3: filter()
 // ========================================
 fn key_concept_3() {
-    let numbers = [1, 2, 3, 4, 5];
+    let numbers = vec![1, 2, 3, 4, 5];
 
-    // Keep only even numbers
-    let result: Vec<i32> = numbers
-        // Create an iterator
+    let even_numbers = numbers
         .iter()
-        // keep only even number
-        .filter(|x| **x % 2 == 0)
-        // Convert &i32 references into i32 values
-        .copied()
-        // Collect the results into a Vec<i32>
-        .collect();
+        .filter(|number| **number % 2 == 0);
 
-    println!("{:?}", result);
+    for number in even_numbers {
+        println!("{}", number);
+    }
 }
 
 // ========================================
-//            key 4: closure
+//              key 4: fold()
 // ========================================
 fn key_concept_4() {
-    // Create a closure that adds 10
-    let add_ten = |x| x + 10;
+    let numbers = vec![1, 2, 3, 4];
 
-    println!("{}", add_ten(5));
+    let sum = numbers
+        .iter()
+        .fold(0, |total, number| total + number);
+
+    println!("{}", sum);
 }
 
 // ========================================
-//      key 5: High order programming
+//            key 5: collect()
 // ========================================
-fn apply<F>(n: i32, f: F) -> i32
-where
-    F: Fn(i32) -> i32,
-{
-    f(n) // Call the function passed as an argument
-}
+fn key_concept_5() {
+    let numbers = vec![1, 2, 3];
 
+    let doubled: Vec<i32> = numbers
+        .iter()
+        .map(|number| number * 2)
+        .collect();
+
+    println!("{:?}", doubled);
+}
 // ========================================
 // iterator and High order programming
 // ========================================
@@ -79,21 +70,19 @@ where
 
 fn main() {
     println!("========================================");
-    println!("key concept 1: iterator");
+    println!("key concept 1: iter()");
     key_concept_1();
     println!("========================================");
-    println!("key concept 2: .map");
+    println!("key concept 2: map()");
     key_concept_2();
     println!("========================================");
-    println!("key concept 3: .filter");
+    println!("key concept 3: filter()");
     key_concept_3();
     println!("========================================");
-    println!("key concept 4: closure");
+    println!("key concept 4: fold()");
     key_concept_4();
     println!("========================================");
-    println!("key concept 5: Higher-Order Function");
-    //apply() รับ function/closure เป็น parameter → จึงเป็น Higher-Order Function.
-    let result = apply(5, |x| x + 1); // Pass a closure to another function
-    println!("{}", result); // 6
+    println!("key concept 5: collect()");
+    key_concept_5();
     println!("========================================");
 }
