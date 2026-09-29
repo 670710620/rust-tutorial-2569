@@ -103,7 +103,7 @@ fn main() {
 
 | Syntax / Rule | Meaning | Example |
 |---|---|---|
-| `[syntax/rule]` | `[ความหมาย]` | `[ตัวอย่าง]` |
+| `Option<T>` | `[ความหมาย]` | `let x: Option<i32> = Some(10)` |
 | `[syntax/rule]` | `[ความหมาย]` | `[ตัวอย่าง]` |
 | `[syntax/rule]` | `[ความหมาย]` | `[ตัวอย่าง]` |
 
