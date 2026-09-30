@@ -139,13 +139,13 @@ Err(E) จะถูกส่งกลับไปพร้อมกับ E (gen
 
 | Syntax / Rule | Meaning | Example |
 |---|---|---|
-| `Option<T>` | `[ความหมาย]` | `let x: Option<i32> = Some(10)` |
-| `[syntax/rule]` | `[ความหมาย]` | `[ตัวอย่าง]` |
-| `[syntax/rule]` | `[ความหมาย]` | `[ตัวอย่าง]` |
+| `Option<T>` | `ใช้ในการแทนที่ค่า ซึงจะมีหรือไม่มีก็ได้` | `let x: Option<i32> = Some(10)` |
+| `Result<T, E> = Ok(T) หรือ Err(E) หรือ ทั้งคู่ ` | `ใช้ในการแทนที่ผลลัพธ์ที่สำเร็จหรือไม่สำเร็จก็ได้` | `let result: Result<i32, Err> = Ok(10)` |
+| `let value =  function()?;` | ` ` | `let x = get_number()?;` |
 
 ### Important Rules
 
-1. `[กฎสำคัญข้อที่ 1]`
+1. ``
 2. `[กฎสำคัญข้อที่ 2]`
 3. `[กฎสำคัญข้อที่ 3]`
 
