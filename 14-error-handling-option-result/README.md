@@ -121,7 +121,7 @@ fn main() {
 
 ### Example 1 — `Panic`
 
-**Purpose:** `ต้องการแสดงการใช้งานของ option `
+**Purpose:** `แสดงการทำงานของ panic`
 
 ```rust
 fn cause_panic(value: i32){
@@ -142,13 +142,13 @@ Panic! The value was zero, which is not allowed here
 
 **Explanation**
 
-` `
+`ส่วนแรกเป็นการสร้าง function ขึ้นมาสำหรับเช็คค่า integer ถ้าค่าที่รับมาตรงตามเงื่อนไข if value == 0 ดังเช่น code ตัวอย่างที่เป็น function main ที่มีการส่งค่า 0 เข้าไปใน function cause_panic ทำให้ output เกิด panic `
 
 ---
 
 ### Example 2 — `[Option]`
 
-**Purpose:** `ต้องการแสดงการใช้งานของ option `
+**Purpose:** `แสดงการใช้งานของ option `
 
 ```rust
 fn find_first_a(text: &str) -> Option<usize>{
@@ -169,13 +169,13 @@ No 'a' found in the text.
 
 **Explanation**
 
-`อันดับแรกก็จะทำการสร้างฟังก์ชันในการหาตัวเอตัวแรกโดยให้มีรีเทิร์นไทป์เป็น option จากนั้นใน main เราก็ทำการสร้าง match ขึ้นมาเพื่อทำการเช็คข้อความที่ใส่เข้าไปในฟังก์ชัน ซึ่งข้อความตามตัวอย่างจะไม่มีตัวเอเลย ทำให้ได้ None แทน ดังนั้นข้อความที่ได้จึงเป็น No 'a' found in the text. `
+`อันดับแรกก็จะทำการสร้าง function ในการหาตัว a ตัวแรกโดยให้มี return type เป็น option จากนั้นใน main เราก็ทำการสร้าง match ขึ้นมาเพื่อทำการเช็คข้อความที่ใส่เข้าไปในฟังก์ชัน ซึ่งข้อความตามตัวอย่างจะไม่มีตัว a เลย ทำให้ได้ None แทน ดังนั้นข้อความที่ได้จึงเป็น No 'a' found in the text. `
 
 ---
 
 ### Example 3 — `Result`
 
-**Purpose:** `[ต้องการสาธิตอะไร]`
+**Purpose:** `แสดงการทำงานของ result`
 
 ```rust
 #[derive(Debug)]
@@ -192,6 +192,7 @@ fn divide(numerator: f64, denominator: f64) -> Result<f64, DivisionError>{
     }
 }
 fn main() {
+    println!("{:?}",divide(5.0,2.0));
     println!("{:?}",divide(5.0,0.0));
 }
 ```
@@ -199,18 +200,18 @@ fn main() {
 **Expected Output**
 
 ```text
+Ok(2.5)
 Err(DivisionError { message: "Cannot divide by Zero " })
 ```
 
 **Explanation**
 
-`ขั้นตอนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างฟังก์ชัน divide ที่มีรีเทิร์นไทป์เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราส่งค่า 5.0 และ 0.0 ทำให้ output เป็น Err(DivisionError { message: "Cannot divide by Zero " }) `
-`
+`ขั้นตอนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างfunction divide ที่มี return เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0.0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราเรียกใช้ค่าที่ตัวหารเป็น 2.0 และ 0.0  `
 
 ---
 ### Example 4 — `Unwrap`
 
-**Purpose:** `[ต้องการสาธิตอะไร]`
+**Purpose:** `การใ้ช unwrap`
 
 ```rust
 fn main(){
@@ -221,12 +222,13 @@ fn main(){
 **Expected Output**
 
 ```text
-Err(DivisionError { message: "Cannot divide by Zero " })
+called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ```
 
 **Explanation**
 
-`[อธิบาย code]`
+`unwrap ทำงานเหมือน match ซึ่งค่า f จะมี data type เป็น file โดย unwrap สามารถเป็นค่าสำเร็จ (Ok()) หรือ ไม่สำเร็จ(Err)ได้ กรณีไม่สำเร็จจะเกิด panic จาก code ตัวอย่างจะได้ output Err เนื่องจากไม่พบไฟล์ hello.txt `
+
 ---
 ### Example 5 — `Expect`
 
@@ -241,12 +243,13 @@ fn main(){
 **Expected Output**
 
 ```text
-[]
+Failed to open it : Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ```
 
 **Explanation**
 
-`[อธิบาย code]`
+`การใช้ expect สามารถระบุข้อความที่เราต้องการลงไปได้ว่า กรณีที่เกิดกรณีไม่สำเร็จ`
+
 ---
 ### Example 6 — `Error Propagation`
 
@@ -269,33 +272,8 @@ fn read_username_from_file() -> Result<String, io::Error>{
     }
 }
 fn main(){
-    let f = File::open("hello.txt").unwrap();
+    ...
 } 
-```
-
-**Expected Output**
-
-```text
-Err(DivisionError { message: "Cannot divide by Zero " })
-```
-
-**Explanation**
-
-`[อธิบาย code]`
----
-### Example 6 — `? Operator`
-
-**Purpose:** `[ต้องการสาธิตอะไร]`
-
-```rust
-fn read_username_from_file() -> Result<String, io::Error>{//return type =string 
-    let mut s = String::new();
-    let f = File::open("hello.txt")?; 
-    
-    f.read_to_string(&mut s)?;
-    Ok(s)
-    
-}
 ```
 
 **Expected Output**
@@ -306,7 +284,35 @@ fn read_username_from_file() -> Result<String, io::Error>{//return type =string
 
 **Explanation**
 
-`[อธิบาย code]`
+`[]`
+
+---
+### Example 7 — `? Operator`
+
+**Purpose:** `จาก example 6เราสามมารถใช้ ? operator ใช้แทนการใช้ match ได้`
+
+```rust
+fn calculate_division_then_add_one(num: f64, den: f64)->Result<f64,DivisionError>{
+    let result = divide(num, den)?;
+    Ok(result +1.0)
+}
+fn main(){
+    println!("{:?}", calculate_division_then_add_one(5.0,2.0));
+    println!("{:?}", calculate_division_then_add_one(5.0,0.0));
+}
+```
+
+**Expected Output**
+
+```text
+Ok(3.5)
+Err(DivisionError { message: "Cannot divide by Zero " })
+```
+
+**Explanation**
+
+`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ?  `
+
 ---
 
 ## 7. Common Mistakes
