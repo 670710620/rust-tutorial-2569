@@ -170,51 +170,107 @@ fn main() {
 
 ## 7. Common Mistakes
 
-### Mistake 1 — `[ชื่อข้อผิดพลาด]`
+### Mistake 1 — `[Using .unwrap() in production code.]`
 
 **Problem**
 
-`[อธิบายปัญหา]`
+`การใช้ production code นั้นถ้าใช้ .unwrap() แล้วเจอ Err จะทำให้ thread นั้นเกิดการ panic ซึ่งถ้าการ panic เกิดขึ้นที่ web server จะทำให้การจัดการคำขอ(Request Handling)หยุดทำงาน และ หากเกิดข้อผิดพลาดร้ายแรงในงานแบบ asynchronous อาจทำให้งานหยุดทำงานโดยไม่แจ้งให้ทราบล่วงหน้า`
 
 **Incorrect Code**
 
 ```rust
-// Incorrect example
+use std::fs;
+
+fn main() {
+    let contents = fs::read_to_string("config.txt").unwrap();
+    let port: u16 = contents.trim().parse().unwrap();
+
+    println!("Starting server on port {}", port);
+}
 ```
 
 **Correct Code**
 
 ```rust
-// Correct example
+use std::error::Error;
+use std::fs;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string("config.txt")?;
+    let port: u16 = contents.trim().parse()?;
+
+    println!("Starting server on port {}", port);
+    Ok(())
+}
 ```
 
 **Why?**
 
-`[อธิบายสาเหตุ]`
+`เพราะ .unwrap() ตรวจเจอข้อผิดพลาดแล้ว panic จะทำการ crash โปรแกรม แต่ถ้าเราใช้ ? แทนนั้น Err จะถูกส่งกลับไปให้ caller เลือกวิธีจัดการ`
 
 ---
 
-### Mistake 2 — `[ชื่อข้อผิดพลาด]`
+### Mistake 2 — `[Matching on error strings instead of error variants.]`
 
 **Problem**
 
-`[อธิบายปัญหา]`
+`มือใหม่มักเช็กข้อผิดพลาดด้วยการดูข้อความ เช่น err.contains("not found") ซึ่งเปราะบางมาก เพราะข้อความ error เปลี่ยนได้ทุกเมื่อ เช่น แก้คำ แก้ภาษา หรือเปลี่ยนรูปแบบ พอข้อความเปลี่ยน โค้ดยังคอมไพล์ผ่านตามปกติ แต่เงื่อนไขที่เช็กไว้จะไม่ทำงานอีกต่อไปโดยไม่มีอะไรเตือนเลย`
 
 **Incorrect Code**
 
 ```rust
-// Incorrect example
+fn find_user(id: u32) -> Result<String, String> {
+    if id == 1 {
+        Ok("Alice".to_string())
+    } else {
+        Err("user not found".to_string())
+    }
+}
+
+fn main() {
+    match find_user(2) {
+        Ok(name) => println!("Hello {}", name),
+        Err(err) => {
+            if err.contains("not found") {
+                println!("Creating a new user...");
+            } else {
+                println!("Something else went wrong");
+            }
+        }
+    }
+}
 ```
 
 **Correct Code**
 
 ```rust
-// Correct example
+#[derive(Debug)]
+enum AppError {
+    UserNotFound,
+    DatabaseDown,
+}
+
+fn find_user(id: u32) -> Result<String, AppError> {
+    if id == 1 {
+        Ok("Alice".to_string())
+    } else {
+        Err(AppError::UserNotFound)
+    }
+}
+
+fn main() {
+    match find_user(2) {
+        Ok(name) => println!("Hello {}", name),
+        Err(AppError::UserNotFound) => println!("Creating a new user..."),
+        Err(AppError::DatabaseDown) => println!("Try again later"),
+    }
+}
 ```
 
 **Why?**
 
-`[อธิบายสาเหตุ]`
+`การเช็ก error ด้วย String ทำให้โค้ดต้องไปพึ่งข้อความที่เขียนไว้ ซึ่งคอมไพเลอร์ไม่ได้ช่วยตรวจสอบตรงนี้ ถ้ามีการเปลี่ยนข้อความจาก user not found เป็น no such user โค้ดที่ใช้ตรวจจับ error ก็อาจไม่ทำงานโดยที่เราไม่รู้ตัว แต่ถ้าใช้ enum เราสามารถกำหนดประเภทของ error ไว้ชัดเจน ทำให้ Rust สามารถตรวจสอบผ่านระบบ type ได้
+`
 
 ---
 
