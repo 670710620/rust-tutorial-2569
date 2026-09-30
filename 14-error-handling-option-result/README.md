@@ -104,14 +104,22 @@ fn main() {
 | Syntax / Rule | Meaning | Example |
 |---|---|---|
 | `Option<T>` | `ใช้ในการแทนที่ค่า ซึงจะมีค่าหรือไม่มีค่าก็ได้` | `let x: Option<i32> = Some(10)` |
-| `Result<T, E> = Ok(T) หรือ Err(E) หรือ ทั้งคู่ ` | `ใช้ในการแทนที่ผลลัพธ์ที่สำเร็จหรือไม่สำเร็จก็ได้` | `let result: Result<i32, Err> = Ok(10)` |
+|`Some(value)`|`แสดงว่า Option มีค่า`|`Some(10)`|
+|`None`|`แสดงว่า Option ไม่มีค่า`|`let x: Option<i32> = None`|
+| `Result<T, E>` | `ใช้ในการแทนที่ผลลัพธ์ที่สำเร็จหรือไม่สำเร็จก็ได้` | `let result: Result<i32, Err> = Ok(10)` |
+|`Ok(value)`|`แสดงว่าผลลัพธ์สำเร็จ `|`OK(10)`|
+|`Err(error)`|`แสดงว่าผลลัพธ์ไม่สำเร็จ`|`Err("Invalid input"`|
+|`match`|`ใช้ตอนแยกหรือจัดการแต่ละกรณีของ Option/Result`|`match result {Ok(x),Err(e),}`|
 | `let value =  function()?;` | ` ถ้า Ok/Some ให้ทำงานต่อไป แต่ถ้า Err/None ให้ส่งค่ากลับจาก function ` | `let x = get_number()?;` |
+|`unwrap()`|`ดึงค่าจาก Some/Ok แต่ถ้า None/Err จะเกิด  panic`|`let x = Some(10).unwrap();`|
+
 
 ### Important Rules
 
 1. `Option จัดการ 2 กรณีได้แก่ Some ,None`
 2. `Result จัดการ 2 กรณี ได้แก่ Ok,Err`
-3. `? สำหรับ Error/ Value Propagation และ Function ต้องมี return type ที่รองรับ propagate เช่น result , Option `
+3. `? สำหรับ Error/ Value Propagation และ Function ต้องมี return type ที่รองรับ propagate เช่น Result , Option `
+4. `unwrap สามารถทำให้ program panic ได้หากผลลัพธ์ที่ได้ Error `
 
 ---
 
@@ -119,7 +127,7 @@ fn main() {
 
 > **ข้อกำหนด:** Code ทุกตัวต้อง Compile และ Run ได้จริงก่อนนำมาใส่ในเอกสาร
 
-### Example 1 — `Panic`
+### Example 1 — `[Panic]`
 
 **Purpose:** `แสดงการทำงานของ panic`
 
@@ -173,7 +181,7 @@ No 'a' found in the text.
 
 ---
 
-### Example 3 — `Result`
+### Example 3 — `[Result]`
 
 **Purpose:** `แสดงการทำงานของ result`
 
@@ -209,7 +217,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 `ขั้นตอนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างfunction divide ที่มี return เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0.0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราเรียกใช้ค่าที่ตัวหารเป็น 2.0 และ 0.0  `
 
 ---
-### Example 4 — `Unwrap`
+### Example 4 — `[Unwrap]`
 
 **Purpose:** `การใ้ช unwrap`
 
@@ -230,9 +238,9 @@ called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, messa
 `unwrap ทำงานเหมือน match ซึ่งค่า f จะมี data type เป็น file โดย unwrap สามารถเป็นค่าสำเร็จ (Ok()) หรือ ไม่สำเร็จ(Err)ได้ กรณีไม่สำเร็จจะเกิด panic จาก code ตัวอย่างจะได้ output Err เนื่องจากไม่พบไฟล์ hello.txt `
 
 ---
-### Example 5 — `Expect`
+### Example 5 — `[Expect]`
 
-**Purpose:** `[ต้องการสาธิตอะไร]`
+**Purpose:** `แสดงการใช้งาน expect`
 
 ```rust
 fn main(){
@@ -248,12 +256,12 @@ Failed to open it : Os { code: 2, kind: NotFound, message: "No such file or dire
 
 **Explanation**
 
-`การใช้ expect สามารถระบุข้อความที่เราต้องการลงไปได้ว่า กรณีที่เกิดกรณีไม่สำเร็จ`
+`การใช้ expect สามารถระบุข้อความที่เราต้องการลงไปได้ในกรณีที่ Error แล้ว`
 
 ---
-### Example 6 — `Error Propagation`
+### Example 6 — `[Error Propagation]`
 
-**Purpose:** `[ต้องการสาธิตอะไร]`
+**Purpose:** `--`
 
 ```rust
 fn read_username_from_file() -> Result<String, io::Error>{
@@ -287,9 +295,9 @@ fn main(){
 `[]`
 
 ---
-### Example 7 — `? Operator`
+### Example 7 — `[? Operator]`
 
-**Purpose:** `จาก example 6เราสามมารถใช้ ? operator ใช้แทนการใช้ match ได้`
+**Purpose:** `แสดงการใช้ ?`
 
 ```rust
 fn calculate_division_then_add_one(num: f64, den: f64)->Result<f64,DivisionError>{
@@ -311,7 +319,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 
 **Explanation**
 
-`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ?  `
+`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ? แทนการเขียน match ซึึ่งถ้าบรรทัดสามารถคำนวนการหารผ่านได้ บรรทัด่อมาที่เป็นย Ok ก็จะทำงานต่อ แต่ถ้า Error บรรทัด Ok ก็จะถูกทำงาน  `
 
 ---
 
