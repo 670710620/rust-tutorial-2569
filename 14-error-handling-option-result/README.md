@@ -103,7 +103,7 @@ fn main() {
 
 | Syntax / Rule | Meaning | Example |
 |---|---|---|
-| `Option<T>` | `ใช้ในการแทนที่ค่า ซึงจะมีหรือไม่มีก็ได้` | `let x: Option<i32> = Some(10)` |
+| `Option<T>` | `ใช้ในการแทนที่ค่า ซึงจะมีค่าหรือไม่มีค่าก็ได้` | `let x: Option<i32> = Some(10)` |
 | `Result<T, E> = Ok(T) หรือ Err(E) หรือ ทั้งคู่ ` | `ใช้ในการแทนที่ผลลัพธ์ที่สำเร็จหรือไม่สำเร็จก็ได้` | `let result: Result<i32, Err> = Ok(10)` |
 | `let value =  function()?;` | ` ` | `let x = get_number()?;` |
 
@@ -119,7 +119,34 @@ fn main() {
 
 > **ข้อกำหนด:** Code ทุกตัวต้อง Compile และ Run ได้จริงก่อนนำมาใส่ในเอกสาร
 
-### Example 1 — `[Option]`
+### Example 1 — `Panic`
+
+**Purpose:** `ต้องการแสดงการใช้งานของ option `
+
+```rust
+fn cause_panic(value: i32){
+    if value == 0{
+        panic!("Panic! The value was zero, which is not allowed here");
+    }
+    println!("Value{} is fine.",value);
+}
+fn main() {
+    cause_panic(0); 
+}
+```
+**Expected Output**
+
+```text
+Panic! The value was zero, which is not allowed here
+```
+
+**Explanation**
+
+` `
+
+---
+
+### Example 2 — `[Option]`
 
 **Purpose:** `ต้องการแสดงการใช้งานของ option `
 
@@ -142,30 +169,144 @@ No 'a' found in the text.
 
 **Explanation**
 
-`[อธิบาย code ทีละส่วนที่สำคัญ]`
+`อันดับแรกก็จะทำการสร้างฟังก์ชันในการหาตัวเอตัวแรกโดยให้มีรีเทิร์นไทป์เป็น option จากนั้นใน main เราก็ทำการสร้าง match ขึ้นมาเพื่อทำการเช็คข้อความที่ใส่เข้าไปในฟังก์ชัน ซึ่งข้อความตามตัวอย่างจะไม่มีตัวเอเลย ทำให้ได้ None แทน ดังนั้นข้อความที่ได้จึงเป็น No 'a' found in the text. `
 
 ---
 
-### Example 2 — `[ชื่อ Example]`
+### Example 3 — `Result`
 
 **Purpose:** `[ต้องการสาธิตอะไร]`
 
 ```rust
+#[derive(Debug)]
+struct DivisionError{
+    message: String,
+}
+fn divide(numerator: f64, denominator: f64) -> Result<f64, DivisionError>{
+    if denominator == 0.0 {
+        Err(DivisionError{
+            message: "Cannot divide by Zero ".to_string(),
+        })
+    }else {
+        Ok(numerator / denominator)
+    }
+}
 fn main() {
-    // Write your runnable Rust code here
+    println!("{:?}",divide(5.0,0.0));
 }
 ```
 
 **Expected Output**
 
 ```text
-[expected output]
+Err(DivisionError { message: "Cannot divide by Zero " })
+```
+
+**Explanation**
+
+`ขั้นตอนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างฟังก์ชัน divide ที่มีรีเทิร์นไทป์เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราส่งค่า 5.0 และ 0.0 ทำให้ output เป็น Err(DivisionError { message: "Cannot divide by Zero " }) `
+`
+
+---
+### Example 4 — `Unwrap`
+
+**Purpose:** `[ต้องการสาธิตอะไร]`
+
+```rust
+fn main(){
+    let f = File::open("hello.txt").unwrap();
+} 
+```
+
+**Expected Output**
+
+```text
+Err(DivisionError { message: "Cannot divide by Zero " })
 ```
 
 **Explanation**
 
 `[อธิบาย code]`
+---
+### Example 5 — `Expect`
 
+**Purpose:** `[ต้องการสาธิตอะไร]`
+
+```rust
+fn main(){
+     let f = File::open("hello.txt").expect("Failed to open it ");
+} 
+```
+
+**Expected Output**
+
+```text
+[]
+```
+
+**Explanation**
+
+`[อธิบาย code]`
+---
+### Example 6 — `Error Propagation`
+
+**Purpose:** `[ต้องการสาธิตอะไร]`
+
+```rust
+fn read_username_from_file() -> Result<String, io::Error>{
+    let f = File::open("hello.txt"); 
+
+    let mut f = match f {
+        Ok(file) => file, 
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();/
+
+    match f.read_to_string(&mut s){
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+fn main(){
+    let f = File::open("hello.txt").unwrap();
+} 
+```
+
+**Expected Output**
+
+```text
+Err(DivisionError { message: "Cannot divide by Zero " })
+```
+
+**Explanation**
+
+`[อธิบาย code]`
+---
+### Example 6 — `? Operator`
+
+**Purpose:** `[ต้องการสาธิตอะไร]`
+
+```rust
+fn read_username_from_file() -> Result<String, io::Error>{//return type =string 
+    let mut s = String::new();
+    let f = File::open("hello.txt")?; 
+    
+    f.read_to_string(&mut s)?;
+    Ok(s)
+    
+}
+```
+
+**Expected Output**
+
+```text
+[]
+```
+
+**Explanation**
+
+`[อธิบาย code]`
 ---
 
 ## 7. Common Mistakes
