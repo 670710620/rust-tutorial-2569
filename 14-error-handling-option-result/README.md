@@ -105,13 +105,13 @@ fn main() {
 |---|---|---|
 | `Option<T>` | `ใช้ในการแทนที่ค่า ซึงจะมีค่าหรือไม่มีค่าก็ได้` | `let x: Option<i32> = Some(10)` |
 | `Result<T, E> = Ok(T) หรือ Err(E) หรือ ทั้งคู่ ` | `ใช้ในการแทนที่ผลลัพธ์ที่สำเร็จหรือไม่สำเร็จก็ได้` | `let result: Result<i32, Err> = Ok(10)` |
-| `let value =  function()?;` | ` ` | `let x = get_number()?;` |
+| `let value =  function()?;` | ` ถ้า Ok/Some ให้ทำงานต่อไป แต่ถ้า Err/None ให้ส่งค่ากลับจาก function ` | `let x = get_number()?;` |
 
 ### Important Rules
 
-1. ``
-2. `[กฎสำคัญข้อที่ 2]`
-3. `[กฎสำคัญข้อที่ 3]`
+1. `Option จัดการ 2 กรณีได้แก่ Some ,None`
+2. `Result จัดการ 2 กรณี ได้แก่ Ok,Err`
+3. `? สำหรับ Error/ Value Propagation และ Function ต้องมี return type ที่รองรับ propagate เช่น result , Option `
 
 ---
 
@@ -264,7 +264,7 @@ fn read_username_from_file() -> Result<String, io::Error>{
         Err(e) => return Err(e),
     };
 
-    let mut s = String::new();/
+    let mut s = String::new();
 
     match f.read_to_string(&mut s){
         Ok(_) => Ok(s),
