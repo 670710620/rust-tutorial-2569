@@ -349,15 +349,15 @@ fn main() {
 **Correct Code**
 
 ```rust
-use std::error::Error;
+use std::num::ParseIntError;
 
-fn read_port(input: &str) -> Result<u16, Box<dyn Error>> {
+fn read_port(input: &str) -> Result<u16, ParseIntError> {
     let port: u16 = input.trim().parse()?; // returns Err to the caller instead of panicking
     Ok(port)
 }
 
 fn main() {
-    let config = "8080"; // try changing this to "abc"
+    let config = "abc"; // try changing this to "8080"
 
     match read_port(config) {
         Ok(port) => println!("Starting server on port {}", port),
