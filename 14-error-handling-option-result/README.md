@@ -571,15 +571,74 @@ fn main() {
 
 ## 10. Rust vs. Other Language
 
-**Comparison Language:** `[Python / C / C++ / Java / Kotlin / ...]`
 
-| Aspect | Rust | Other Language |
-|---|---|---|
-| Syntax | `[อธิบาย]` | `[อธิบาย]` |
-| Semantics / Behavior | `[อธิบาย]` | `[อธิบาย]` |
-| Type System | `[อธิบาย]` | `[อธิบาย]` |
-| Memory Management | `[อธิบาย]` | `[อธิบาย]` |
-| Safety | `[อธิบาย]` | `[อธิบาย]` |
+<table>
+<tr>
+<th>Aspect</th>
+<th>Rust</th>
+<th>Java</th>
+<th>Python</th>
+<th>Swift</th>
+</tr>
+
+<tr>
+<td valign="top">Syntax</td>
+
+<td valign="top">
+
+<ul>
+<li><strong>จัดการข้อผิดพลาดด้วย <code>Option&lt;T&gt;</code> และ <code>Result&lt;T, E&gt;</code>:</strong> โดย <code>Option&lt;T&gt;</code> ใช้จัดการกรณีที่ไม่มีข้อมูล (ค่าว่าง) ส่วน <code>Result&lt;T, E&gt;</code> ใช้จัดการกรณีที่เกิดข้อผิดพลาดซึ่งสามารถแก้ไขได้</li>
+
+<li><strong>กำหนดโครงสร้างด้วย Enum และ รูปแบบตัวเลือกย่อย (Variant)</strong> ได้แก่ <code>Some/None</code> สำหรับ <code>Option</code> และ <code>Ok/Err</code> สำหรับ <code>Result</code></li>
+
+<li><strong>แกะค่าข้อมูลด้วย Pattern Matching</strong> โดยใช้ไวยากรณ์ <code>match</code> และ <code>if let</code></li>
+
+<li><strong>ส่งต่อข้อผิดพลาดอย่างรวดเร็วด้วย <code>? Operator</code></strong></li>
+
+<li><strong>เมธอดดึงค่าข้อมูล <code>unwrap()</code> และ <code>expect()</code></strong> ใช้แกะเอาค่าข้างใน <code>Option</code> หรือ <code>Result</code> ออกมาใช้งาน หากเจอข้อผิดพลาด (<code>None/Err</code>) จะสั่งหยุดโปรแกรมทันที (<code>panic!</code>) โดย <code>expect()</code> สามารถใส่ข้อความอธิบายสาเหตุเพิ่มเติมได้</li>
+
+<li><strong>คำสั่ง <code>panic!</code></strong> คำสั่งสั่งหยุดโปรแกรมทันที ใช้เมื่อเจอข้อผิดพลาดร้ายแรงที่ไม่สามารถแก้ไขหรือประมวลผลต่อได้</li>
+</ul>
+
+</td>
+
+<td valign="top">
+
+<ul>
+<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-catch-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>catch:</code> เป็นบล็อกดักจับและจัดการวัตถุ Exception ตามลำดับชั้น Polymorphism (ต้องเรียงจากคลาสลูกไปคลาสแม่) และ <code>finally:</code> บล็อกที่ได้รับการประมวลผลเสมอ ไม่ว่าจะเกิด Exception หรือไม่ก็ตาม</li>
+
+<li><strong>การระบุข้อผิดพลาดบนส่วนหัวเมธอด</strong> ใช้คำสั่ง <code>throws</code> เพื่อบอกว่าเมธอดนั้นมีโอกาสโยน Exception ออกไปให้ผู้เรียกใช้งานต้องจัดการต่อ</li>
+</ul>
+
+</td>
+
+<td valign="top">
+    
+<ul>
+<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-except-else-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>except:</code> เป็นบล็อกสำหรับระบุประเภท Exception ที่ต้องการดักจับเพื่อจัดการ, <code>else:</code> เป็นบล็อกที่จะประมวลผลเฉพาะเมื่อไม่พบ Exception ใดๆ ในบล็อก <code>try</code> และ <code>finally:</code> เป็นบล็อกที่จะประมวลผลเสมอ ไม่ว่าจะเกิด Exception หรือไม่ก็ตาม</li>
+
+<li><strong>ใช้คำสั่ง <code>raise</code> ในการส่ง Exception ออกไปเมื่อเกิดเงื่อนไขที่ผิดปกติ</strong></li>
+
+<li><strong>ตรวจสอบตัวแปรที่อาจไม่มีค่าด้วยไวยากรณ์ <code>is None</code></strong></li>
+</ul>
+
+</td>
+
+<td valign="top">
+<ul>
+<li><strong>ใช้ <code>throws</code> สำหรับประกาศฟังก์ชันที่อาจโยนข้อผิดพลาด</strong> และใช้โครงสร้างบล็อก <code>do-catch</code> ในการดักจับและจัดการข้อผิดพลาด</li>
+
+<li><strong>บังคับใส่คีย์เวิร์ดนำหน้าฟังก์ชันที่ประกาศ <code>throws</code> เสมอ</strong> เพื่อเน้นจุดที่อาจเกิด Error ให้เห็นชัดเจนในโค้ด โดยแบ่งออกเป็น 3 รูปแบบ ได้แก่ <code>try:</code> ใช้เรียกฟังก์ชันตามปกติภายในบล็อก <code>do-catch</code> (หรือส่งต่อ Error ไปยังฟังก์ชันอื่น), <code>try?:</code> ใช้เปลี่ยนข้อผิดพลาดให้กลายเป็นค่า nil (แปลงผลลัพธ์เป็น <code>Optional&lt;T&gt;</code>), <code>try!</code> เป็นการบังคับแกะค่าผลลัพธ์ออกมาทันทีเมื่อมั่นใจว่าไม่มี Error ขึ้นแน่นอน</li>
+
+<li><strong>มีไวยากรณ์สั้นสำหรับจัดการค่าว่าง (nil)</strong> โดยไม่ต้องใช้โครงสร้าง Error Handling เต็มรูปแบบ ได้แก่ <code>if let</code> / <code>guard let</code>, <code>?.</code> และ <code>??</code></li>
+</ul>
+</td>
+
+</tr>
+
+<tr>
+</tr>
+</table>
 
 ### Rust Example
 
