@@ -589,7 +589,7 @@ fn main() {
 
 <td valign="top">
 <ul>
-<li><strong>จัดการข้อผิดพลาดด้วย <code>Option&lt;T&gt;</code> และ <code>Result&lt;T, E&gt;</code>:</strong> โดย <code>Option&lt;T&gt;</code> ใช้จัดการกรณีที่ไม่มีข้อมูล (ค่าว่าง) ส่วน <code>Result&lt;T, E&gt;</code> ใช้จัดการกรณีที่เกิดข้อผิดพลาดซึ่งสามารถแก้ไขได้</li>
+<li><strong>จัดการข้อผิดพลาดด้วย <code>Option&lt;T&gt;</code> และ <code>Result&lt;T, E&gt;</code></strong> โดย <code>Option&lt;T&gt;</code> ใช้จัดการกรณีที่ไม่มีข้อมูล (ค่าว่าง) ส่วน <code>Result&lt;T, E&gt;</code> ใช้จัดการกรณีที่เกิดข้อผิดพลาดซึ่งสามารถแก้ไขได้</li>
 
 <li><strong>กำหนดโครงสร้างด้วย <code>Enum</code> และ รูปแบบตัวเลือกย่อย (<code>Variant</code>)</strong> ได้แก่ <code>Some/None</code> สำหรับ <code>Option</code> และ <code>Ok/Err</code> สำหรับ <code>Result</code></li>
 
@@ -599,11 +599,18 @@ fn main() {
 
 <li><strong>เมธอดดึงค่าข้อมูล <code>unwrap()</code> และ <code>expect()</code></strong> ใช้แกะเอาค่าข้างใน <code>Option</code> หรือ <code>Result</code> ออกมาใช้งาน หากเจอข้อผิดพลาด (<code>None/Err</code>) จะสั่งหยุดโปรแกรมทันที (<code>panic!</code>) โดย <code>expect()</code> สามารถใส่ข้อความอธิบายสาเหตุเพิ่มเติมได้</li>
 
-<li><strong>คำสั่ง <code>panic!</code></strong> คำสั่งสั่งหยุดโปรแกรมทันที ใช้เมื่อเจอข้อผิดพลาดร้ายแรงที่ไม่สามารถแก้ไขหรือประมวลผลต่อได้</li>
+<li><strong>คำสั่ง <code>panic!</code></strong> เป็นการสั่งหยุดโปรแกรมทันที ใช้เมื่อเจอข้อผิดพลาดร้ายแรงที่ไม่สามารถแก้ไขหรือประมวลผลต่อได้</li>
 
 <td valign="top">
 <ul>
-<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-catch-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>catch:</code> เป็นบล็อกดักจับและจัดการวัตถุ <code>Exception</code> ตามลำดับชั้น <code>Polymorphism</code> (ต้องเรียงจากคลาสลูกไปคลาสแม่) และ <code>finally:</code> เป็นบล็อกที่ได้รับการประมวลผลเสมอ ไม่ว่าจะเกิด <code>Exception</code> หรือไม่ก็ตาม</li>
+<li>
+<strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-catch-finally</code></strong> โดย
+<ul>
+<li><code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด</li>
+<li><code>catch:</code> เป็นบล็อกดักจับและจัดการวัตถุ <code>Exception</code> ตามลำดับชั้น <code>Polymorphism</code> (ต้องเรียงจากคลาสลูกไปคลาสแม่)</li>
+<li><code>finally:</code> บล็อกที่ได้รับการประมวลผลเสมอ ไม่ว่าจะเกิด <code>Exception</code> หรือไม่ก็ตาม</li>
+</ul>
+</li>
 
 <li><strong>การระบุข้อผิดพลาดบนส่วนหัวเมธอด</strong> ใช้คำสั่ง <code>throws</code> เพื่อบอกว่าเมธอดนั้นมีโอกาสโยน <code>Exception</code> ออกไปให้ผู้เรียกใช้งานต้องจัดการต่อ</li>
 </ul>
@@ -617,7 +624,7 @@ fn main() {
 <ul>
 <li><strong>มอง <code>Error</code> เป็นค่าข้อมูลปกติ</strong> ที่ถูกส่งคืนจากฟังก์ชันเหมือนการคืนค่าทั่วไปผ่านโครงสร้าง <code>Result&lt;T, E&gt;</code></li>
 
-<li><strong>ตัวดำเนินการ <code>?</code> ทำงานแบบ <code>Short-circuiting</code></strong> โดยหากประมวลผลแล้วเกิดข้อผิดพลาด ระบบจะทำการคืนค่าข้อผิดพลาดกลับไปยังฟังก์ชันผู้เรียกทันทีโดยอัตโนมัติ</li>
+<li><strong><code>?</code> Operator ทำงานแบบ <code>Short-circuiting</code></strong> โดยหากประมวลผลแล้วเกิดข้อผิดพลาด ระบบจะทำการคืนค่าข้อผิดพลาดกลับไปยังฟังก์ชันผู้เรียกทันทีโดยอัตโนมัติ</li>
 
 <li><strong>คำสั่ง <code>panic!</code></strong> จะสั่งหยุดหน่วยการทำงานปัจจุบันทันทีเมื่อเกิดข้อผิดพลาดร้ายแรง โดยระบบจะถอยย้อน <code>Stack</code> เพื่อเคลียร์ตัวแปรและคืนทรัพยากร ก่อนปิดการทำงานลง</li>
 </ul>
@@ -625,7 +632,7 @@ fn main() {
 
 <td valign="top">
 <ul>
-<li><strong>เมื่อคำสั่ง <code>throw</code> ทำงาน</strong> ระบบรันไทม์จะหยุดการประมวลผลในขอบเขต ปัจจุบันทันที และเริ่มกระบวนการถอยย้อน <code>Stack</code> โดยการยกเลิก <code>Stack Frame</code> ไล่ย้อนกลับไปตามลำดับการเรียกใช้งาน เพื่อค้นหาบล็อก <code>catch</code> ที่มีชนิดข้อมูลสอดคล้องกับวัตถุ <code>Exception</code> นั้นมาจัดการ</li>
+<li><strong>เมื่อคำสั่ง <code>throw</code> ทำงาน</strong> ระบบรันไทม์จะหยุดการประมวลผลในขอบเขตปัจจุบันทันที และเริ่มกระบวนการถอยย้อน <code>Stack</code> โดยการยกเลิก <code>Stack Frame</code> ไล่ย้อนกลับไปตามลำดับการเรียกใช้งาน เพื่อค้นหาบล็อก <code>catch</code> ที่มีชนิดข้อมูลสอดคล้องกับวัตถุ <code>Exception</code> นั้นมาจัดการ</li>
 </ul>
 </td>
 </tr>
@@ -645,7 +652,13 @@ fn main() {
 
 <td valign="top">
 <ul>
-<li><strong>เป็นลำดับชั้นชนิดข้อมูล</strong> โดยระบบ <code>Type</code> ใน Java มีคลาสสูงสุดคือ <code>java.lang.Throwable</code> ซึ่งถูกจำแนกออกเป็น 2 ประเภทหลักคือ <code>java.lang.Error</code> (ข้อผิดพลาดรุนแรงในระดับ JVM ที่โปรแกรมไม่ควรจัดการ) และ <code>java.lang.Exception</code> (ข้อผิดพลาดจากลอจิกหรือปัจจัยภายนอกที่โปรแกรมสามารถดักจับได้)</li>
+<li>
+<strong>เป็นลำดับชั้นชนิดข้อมูล</strong> โดยระบบ <code>Type</code> ใน Java มีคลาสสูงสุดคือ <code>java.lang.Throwable</code> ซึ่งถูกจำแนกออกเป็น 2 ประเภทหลักคือ
+<ul>
+<li><code>java.lang.Error</code> (ข้อผิดพลาดรุนแรงในระดับ JVM ที่โปรแกรมไม่ควรจัดการ)</li>
+<li><code>java.lang.Exception</code> (ข้อผิดพลาดจากลอจิกหรือปัจจัยภายนอกที่โปรแกรมสามารถดักจับได้)</li>
+</ul>
+</li>
 
 <li><strong>มี <code>Checked Exceptions</code></strong> ซึ่งเป็น Exceptions ประเภทที่บังคับตรวจสอบหรือจัดการตอนคอมไพล์</li>
 
