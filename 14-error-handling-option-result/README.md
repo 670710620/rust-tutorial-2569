@@ -1014,16 +1014,90 @@ fn main() {
 
 <p><strong>หมายเหตุ:</strong> แบ่งการเปรียบเทียบออกเป็น 3 ตาราง เพื่อให้เนื้อหาไม่แน่นเกินไปและอ่านง่ายขึ้น โดยเปรียบเทียบ Rust กับ Java, Python และ Swift ตามลำดับ</p>
 
+---
+
+### ตัวอย่างโค้ดการจัดการข้อผิดพลาดจากการแปลงข้อมูลและการตรวจสอบผลลัพธ์ในแต่ละภาษา
+
+ตัวอย่างนี้เป็นการ**แปลงข้อมูลจากข้อความ (String) ให้เป็นข้อมูลชนิดจำนวนเต็ม (Integer/Int)** หากสามารถแปลงเป็นตัวเลขได้จะนำค่าที่แปลงได้ไปคูณ 2 แล้วแสดงผลลัพธ์ที่คำนวณได้ แต่หากแปลงไม่ได้ เช่น ข้อมูล `"abc"` จะเกิดข้อผิดพลาดขึ้น ซึ่งแต่ละภาษาจะมีวิธีจัดการข้อผิดพลาดที่แตกต่างกันไปตามรูปแบบของภาษา
+
 ### Rust Example
 
 ```rust
-// Rust code
+use std::num::ParseIntError;
+
+fn parse_and_double(text: &str) -> Result<i32, ParseIntError> {
+    let number = text.parse::<i32>()?; 
+    Ok(number * 2)
+}
+
+fn main() {
+    let input = "abc"; 
+
+    match parse_and_double(input) {
+        Ok(val) => println!("Success: {}", val),
+        Err(err) => println!("Parsing Failure: {}", err),
+    }
+}
+```
+### Java Example
+
+```java
+public class ErrorHandlingJava {
+    public static void main(String[] args) {
+        String input = "abc";
+        try {
+            int number = Integer.parseInt(input);
+            number = number * 2;
+            System.out.println("Success: " + number);
+        } catch (NumberFormatException e) {
+            System.out.println("Parsing Failure -> " + e);
+        }
+    }
+}
+
 ```
 
-### `[Other Language]` Example
+### Python Example
 
 ```python
-# Other language code
+def parse_and_double(text: str) -> int:
+    number = int(text)
+    return number * 2
+
+input = "abc"
+try:
+    result = parse_and_double(input)
+    print(f"Success: {result}")
+except ValueError as err:
+    print(f"Parsing Failure: {err}")
+```
+
+### Swift Example
+
+```swift
+import Foundation
+
+enum ParseError: Error {
+    case invalidDigit
+}
+
+func parseAndDouble(_ text: String) throws -> Int {
+    guard let number = Int(text) else {
+        throw ParseError.invalidDigit
+    }
+    return number * 2
+}
+
+let input = "abc" 
+
+do {
+    let result = try parseAndDouble(input)
+    print("Success: \(result)")
+} catch ParseError.invalidDigit {
+    print("Parsing Failure: Invalid digit found")
+} catch {
+    print("Parsing Failure: \(error)")
+}
 ```
 
 ### Analysis
