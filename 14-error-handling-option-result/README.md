@@ -442,47 +442,98 @@ fn main() {
 
 > จัดทำแบบฝึกหัด **2 ข้อ** ที่สอดคล้องกับ Topic และมีระดับความยากเหมาะสม
 
-### Exercise 1 — `[ชื่อโจทย์]`
+### Exercise 1 — หาเลขคู่ตัวแรก (Option)
 
 **Problem**
 
-`[เขียนโจทย์]`
+เขียนฟังก์ชัน `first_even` ที่รับ slice ของ `i32` แล้วคืนค่าเลขคู่ตัวแรกที่พบ
+โดยมี return type เป็น `Option<i32>` (ถ้าไม่มีเลขคู่ให้คืน `None`)
+จากนั้นใน `main` ให้ใช้ `match` แสดงผลทั้งสองกรณี
 
 **Hint**
 
-`[คำใบ้]`
+ใช้ loop ตรวจทีละตัว ถ้า `n % 2 == 0` ให้ `return Some(n)` และถ้าจบ loop แล้วยังไม่เจอให้คืน `None`
 
 **Solution**
 
 ```rust
-// Solution code
+fn first_even(numbers: &[i32]) -> Option<i32> {
+    for &n in numbers {
+        if n % 2 == 0 {
+            return Some(n);
+        }
+    }
+    None
+}
+
+fn main() {
+    match first_even(&[1, 3, 4, 7]) {
+        Some(n) => println!("First even number: {}", n),
+        None => println!("No even number found."),
+    }
+
+    match first_even(&[1, 3, 5]) {
+        Some(n) => println!("First even number: {}", n),
+        None => println!("No even number found."),
+    }
+}
+```
+
+**Expected Output**
+
+```text
+First even number: 4
+No even number found.
 ```
 
 **Explanation**
 
-`[อธิบายแนวทางแก้]`
+ฟังก์ชันวนตรวจตัวเลขทีละตัว ถ้าเจอเลขคู่จะคืน `Some(n)` ทันที แต่ถ้าวนจนครบแล้วไม่เจอ จะคืน `None`
+ใน `main` เราใช้ `match` จัดการทั้ง 2 กรณี (`Some` / `None`) ซึ่ง Rust บังคับให้เราจัดการครบทุกกรณี จึงไม่มีโอกาสลืมเช็กกรณีที่ไม่มีค่า
 
 ---
 
-### Exercise 2 — `[ชื่อโจทย์]`
+### Exercise 2 — บวกเลขจากข้อความ (Result และ ?)
 
 **Problem**
 
-`[เขียนโจทย์]`
+เขียนฟังก์ชัน `add_strings` ที่รับข้อความ 2 ตัว (`&str`) แปลงเป็น `i32` แล้วคืนผลบวก
+โดยมี return type เป็น `Result<i32, ParseIntError>` และต้องใช้ `?` ในการส่ง error กลับ (ห้ามใช้ `unwrap`)
 
 **Hint**
 
-`[คำใบ้]`
+ใช้ `.parse::<i32>()?` กับข้อความแต่ละตัว ถ้าแปลงไม่ได้ `?` จะ return `Err` ออกจากฟังก์ชันให้อัตโนมัติ
+อย่าลืม `use std::num::ParseIntError;`
 
 **Solution**
 
 ```rust
-// Solution code
+use std::num::ParseIntError;
+
+fn add_strings(a: &str, b: &str) -> Result<i32, ParseIntError> {
+    let x = a.trim().parse::<i32>()?;
+    let y = b.trim().parse::<i32>()?;
+    Ok(x + y)
+}
+
+fn main() {
+    println!("{:?}", add_strings("10", "20"));
+    println!("{:?}", add_strings("10", "abc"));
+}
+```
+
+**Expected Output**
+
+```text
+Ok(30)
+Err(ParseIntError { kind: InvalidDigit })
 ```
 
 **Explanation**
 
-`[อธิบายแนวทางแก้]`
+`parse::<i32>()` คืนค่าเป็น `Result` ถ้าแปลงสำเร็จ `?` จะดึงค่าออกมาใช้ต่อ แต่ถ้าล้มเหลว (เช่น `"abc"`)
+`?` จะ return `Err` กลับไปให้ผู้เรียกทันที โดยบรรทัด `Ok(x + y)` จะไม่ถูกรัน
+วิธีนี้ปลอดภัยกว่า `unwrap` ที่จะทำให้โปรแกรม panic (ตรงกับ Common Mistake ข้อ 1)
 
 ---
 
