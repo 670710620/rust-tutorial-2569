@@ -14,7 +14,7 @@
 | 1 | นายกันต์ธร บุตรเบ้า | 670710619 | `@[กรอก GitHub username]` | Concept + Short Code Illustration (สรุปแนวคิดหลัก + โค้ดตัวอย่างสั้น) |
 | 2 | นางสาวฉันทณัฏฐ วิชพันธุ์ | 670710620 | `@[กรอก GitHub username]` | Detailed Code + Live Demo (โค้ดเชิงลึก + สาธิตสด) |
 | 3 | นางสาวณัฐกฤตา บุญมี | 670710621 | `@[กรอก GitHub username]` | Rust vs Other Language + PPL Analysis (เปรียบเทียบภาษา + วิเคราะห์เชิง PPL) |
-| 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[กรอก GitHub username]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
+| 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[670710622]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
 
 > แก้ไข GitHub Username ของแต่ละคนให้ตรงกับบัญชีจริงก่อนเริ่มทำงาน (ผู้สอนจะใช้คอลัมน์นี้เชิญเป็น collaborator ของ repository)
 
@@ -334,12 +334,14 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 **Incorrect Code**
 
 ```rust
-use std::fs;
+fn read_port(input: &str) -> u16 {
+    input.trim().parse().unwrap() // panics if input is not a valid number
+}
 
 fn main() {
-    let contents = fs::read_to_string("config.txt").unwrap();
-    let port: u16 = contents.trim().parse().unwrap();
+    let config = "8080"; // try changing this to "abc"
 
+    let port = read_port(config);
     println!("Starting server on port {}", port);
 }
 ```
@@ -348,20 +350,25 @@ fn main() {
 
 ```rust
 use std::error::Error;
-use std::fs;
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string("config.txt")?;
-    let port: u16 = contents.trim().parse()?;
+fn read_port(input: &str) -> Result<u16, Box<dyn Error>> {
+    let port: u16 = input.trim().parse()?; // returns Err to the caller instead of panicking
+    Ok(port)
+}
 
-    println!("Starting server on port {}", port);
-    Ok(())
+fn main() {
+    let config = "8080"; // try changing this to "abc"
+
+    match read_port(config) {
+        Ok(port) => println!("Starting server on port {}", port),
+        Err(e) => println!("Invalid config: {}", e),
+    }
 }
 ```
 
 **Why?**
 
-`เพราะ .unwrap() ตรวจเจอข้อผิดพลาดแล้ว panic จะทำการ crash โปรแกรม แต่ถ้าเราใช้ ? แทนนั้น Err จะถูกส่งกลับไปให้ caller เลือกวิธีจัดการ`
+`เพราะ .unwrap() ตรวจเจอข้อผิดพลาดแล้ว panic จะทำการ crash โปรแกรม แต่ถ้าเราใช้ ? แทนนั้น Errจะถูกส่งกลับไปให้ caller เลือกวิธีจัดการ`
 
 ---
 
@@ -369,7 +376,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 **Problem**
 
-`มือใหม่มักเช็กข้อผิดพลาดด้วยการดูข้อความ เช่น err.contains("not found") ซึ่งเปราะบางมาก เพราะข้อความ error เปลี่ยนได้ทุกเมื่อ เช่น แก้คำ แก้ภาษา หรือเปลี่ยนรูปแบบ พอข้อความเปลี่ยน โค้ดยังคอมไพล์ผ่านตามปกติ แต่เงื่อนไขที่เช็กไว้จะไม่ทำงานอีกต่อไปโดยไม่มีอะไรเตือนเลย`
+`Developer บางคนมักเช็กข้อผิดพลาดด้วยการดูข้อความ เช่น err.contains("not found") ซึ่งเปราะบางมาก เพราะข้อความ error เปลี่ยนได้ทุกเมื่อ เช่น แก้คำ แก้ภาษา หรือเปลี่ยนรูปแบบ พอข้อความเปลี่ยน โค้ดยังคอมไพล์ผ่านตามปกติ แต่เงื่อนไขที่เช็กไว้จะไม่ทำงานอีกต่อไปโดยไม่มีอะไรเตือนเลย`
 
 **Incorrect Code**
 
@@ -406,15 +413,17 @@ enum AppError {
 }
 
 fn find_user(id: u32) -> Result<String, AppError> {
-    if id == 1 {
-        Ok("Alice".to_string())
-    } else {
-        Err(AppError::UserNotFound)
+    match id {
+        1 => Ok("Alice".to_string()),
+        99 => Err(AppError::DatabaseDown),
+        _ => Err(AppError::UserNotFound),
     }
 }
 
 fn main() {
-    match find_user(2) {
+    let id = 2; // try 1 (found), 2 (not found), 99 (database down)
+
+    match find_user(id) {
         Ok(name) => println!("Hello {}", name),
         Err(AppError::UserNotFound) => println!("Creating a new user..."),
         Err(AppError::DatabaseDown) => println!("Try again later"),
@@ -424,7 +433,7 @@ fn main() {
 
 **Why?**
 
-`การเช็ก error ด้วย String ทำให้โค้ดต้องไปพึ่งข้อความที่เขียนไว้ ซึ่งคอมไพเลอร์ไม่ได้ช่วยตรวจสอบตรงนี้ ถ้ามีการเปลี่ยนข้อความจาก user not found เป็น no such user โค้ดที่ใช้ตรวจจับ error ก็อาจไม่ทำงานโดยที่เราไม่รู้ตัว แต่ถ้าใช้ enum เราสามารถกำหนดประเภทของ error ไว้ชัดเจน ทำให้ Rust สามารถตรวจสอบผ่านระบบ type ได้
+`การเช็ก error ด้วย String ทำให้โค้ดต้องไปพึ่งพาข้อความที่เขียนไว้ ซึ่งคอมไพเลอร์ไม่ได้ช่วยตรวจสอบตรงนี้ ถ้ามีการเปลี่ยนข้อความจาก user not found เป็น no such user โค้ดที่ใช้ตรวจจับ error ก็อาจไม่ทำงานโดยที่เราไม่รู้ตัว แต่ถ้าใช้ enum เราสามารถกำหนดประเภทของ error ไว้ชัดเจน ทำให้ Rust สามารถตรวจสอบผ่านระบบ type ได้
 `
 
 ---
