@@ -571,74 +571,141 @@ fn main() {
 
 ## 10. Rust vs. Other Language
 
+<h3>ตารางที่ 1: เปรียบเทียบ Rust และ Java</h3>
 
 <table>
+<thead>
 <tr>
 <th>Aspect</th>
 <th>Rust</th>
 <th>Java</th>
-<th>Python</th>
-<th>Swift</th>
 </tr>
+</thead>
+
+<tbody>
 
 <tr>
-<td valign="top">Syntax</td>
+<td valign="top"><strong>Syntax</strong></td>
 
 <td valign="top">
-
 <ul>
 <li><strong>จัดการข้อผิดพลาดด้วย <code>Option&lt;T&gt;</code> และ <code>Result&lt;T, E&gt;</code>:</strong> โดย <code>Option&lt;T&gt;</code> ใช้จัดการกรณีที่ไม่มีข้อมูล (ค่าว่าง) ส่วน <code>Result&lt;T, E&gt;</code> ใช้จัดการกรณีที่เกิดข้อผิดพลาดซึ่งสามารถแก้ไขได้</li>
 
-<li><strong>กำหนดโครงสร้างด้วย Enum และ รูปแบบตัวเลือกย่อย (Variant)</strong> ได้แก่ <code>Some/None</code> สำหรับ <code>Option</code> และ <code>Ok/Err</code> สำหรับ <code>Result</code></li>
+<li><strong>กำหนดโครงสร้างด้วย <code>Enum</code> และ รูปแบบตัวเลือกย่อย (<code>Variant</code>)</strong> ได้แก่ <code>Some/None</code> สำหรับ <code>Option</code> และ <code>Ok/Err</code> สำหรับ <code>Result</code></li>
 
-<li><strong>แกะค่าข้อมูลด้วย Pattern Matching</strong> โดยใช้ไวยากรณ์ <code>match</code> และ <code>if let</code></li>
+<li><strong>แกะค่าข้อมูลด้วย <code>Pattern Matching</code></strong> โดยใช้ไวยากรณ์ <code>match</code> และ <code>if let</code></li>
 
 <li><strong>ส่งต่อข้อผิดพลาดอย่างรวดเร็วด้วย <code>? Operator</code></strong></li>
 
 <li><strong>เมธอดดึงค่าข้อมูล <code>unwrap()</code> และ <code>expect()</code></strong> ใช้แกะเอาค่าข้างใน <code>Option</code> หรือ <code>Result</code> ออกมาใช้งาน หากเจอข้อผิดพลาด (<code>None/Err</code>) จะสั่งหยุดโปรแกรมทันที (<code>panic!</code>) โดย <code>expect()</code> สามารถใส่ข้อความอธิบายสาเหตุเพิ่มเติมได้</li>
 
 <li><strong>คำสั่ง <code>panic!</code></strong> คำสั่งสั่งหยุดโปรแกรมทันที ใช้เมื่อเจอข้อผิดพลาดร้ายแรงที่ไม่สามารถแก้ไขหรือประมวลผลต่อได้</li>
-</ul>
-
-</td>
-
-<td valign="top">
-
-<ul>
-<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-catch-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>catch:</code> เป็นบล็อกดักจับและจัดการวัตถุ Exception ตามลำดับชั้น Polymorphism (ต้องเรียงจากคลาสลูกไปคลาสแม่) และ <code>finally:</code> บล็อกที่ได้รับการประมวลผลเสมอ ไม่ว่าจะเกิด Exception หรือไม่ก็ตาม</li>
-
-<li><strong>การระบุข้อผิดพลาดบนส่วนหัวเมธอด</strong> ใช้คำสั่ง <code>throws</code> เพื่อบอกว่าเมธอดนั้นมีโอกาสโยน Exception ออกไปให้ผู้เรียกใช้งานต้องจัดการต่อ</li>
-</ul>
-
-</td>
-
-<td valign="top">
-    
-<ul>
-<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-except-else-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>except:</code> เป็นบล็อกสำหรับระบุประเภท Exception ที่ต้องการดักจับเพื่อจัดการ, <code>else:</code> เป็นบล็อกที่จะประมวลผลเฉพาะเมื่อไม่พบ Exception ใดๆ ในบล็อก <code>try</code> และ <code>finally:</code> เป็นบล็อกที่จะประมวลผลเสมอ ไม่ว่าจะเกิด Exception หรือไม่ก็ตาม</li>
-
-<li><strong>ใช้คำสั่ง <code>raise</code> ในการส่ง Exception ออกไปเมื่อเกิดเงื่อนไขที่ผิดปกติ</strong></li>
-
-<li><strong>ตรวจสอบตัวแปรที่อาจไม่มีค่าด้วยไวยากรณ์ <code>is None</code></strong></li>
-</ul>
-
-</td>
 
 <td valign="top">
 <ul>
-<li><strong>ใช้ <code>throws</code> สำหรับประกาศฟังก์ชันที่อาจโยนข้อผิดพลาด</strong> และใช้โครงสร้างบล็อก <code>do-catch</code> ในการดักจับและจัดการข้อผิดพลาด</li>
+<li><strong>จัดการข้อผิดพลาดด้วยโครงสร้างบล็อก <code>try-catch-finally</code></strong> โดย <code>try:</code> เป็นบล็อกสำหรับใส่คำสั่งที่มีโอกาสเกิดข้อผิดพลาด, <code>catch:</code> เป็นบล็อกดักจับและจัดการวัตถุ <code>Exception</code> ตามลำดับชั้น <code>Polymorphism</code> (ต้องเรียงจากคลาสลูกไปคลาสแม่) และ <code>finally:</code> เป็นบล็อกที่ได้รับการประมวลผลเสมอ ไม่ว่าจะเกิด <code>Exception</code> หรือไม่ก็ตาม</li>
 
-<li><strong>บังคับใส่คีย์เวิร์ดนำหน้าฟังก์ชันที่ประกาศ <code>throws</code> เสมอ</strong> เพื่อเน้นจุดที่อาจเกิด Error ให้เห็นชัดเจนในโค้ด โดยแบ่งออกเป็น 3 รูปแบบ ได้แก่ <code>try:</code> ใช้เรียกฟังก์ชันตามปกติภายในบล็อก <code>do-catch</code> (หรือส่งต่อ Error ไปยังฟังก์ชันอื่น), <code>try?:</code> ใช้เปลี่ยนข้อผิดพลาดให้กลายเป็นค่า nil (แปลงผลลัพธ์เป็น <code>Optional&lt;T&gt;</code>), <code>try!</code> เป็นการบังคับแกะค่าผลลัพธ์ออกมาทันทีเมื่อมั่นใจว่าไม่มี Error ขึ้นแน่นอน</li>
-
-<li><strong>มีไวยากรณ์สั้นสำหรับจัดการค่าว่าง (nil)</strong> โดยไม่ต้องใช้โครงสร้าง Error Handling เต็มรูปแบบ ได้แก่ <code>if let</code> / <code>guard let</code>, <code>?.</code> และ <code>??</code></li>
+<li><strong>การระบุข้อผิดพลาดบนส่วนหัวเมธอด</strong> ใช้คำสั่ง <code>throws</code> เพื่อบอกว่าเมธอดนั้นมีโอกาสโยน <code>Exception</code> ออกไปให้ผู้เรียกใช้งานต้องจัดการต่อ</li>
 </ul>
 </td>
-
 </tr>
 
 <tr>
+<td valign="top"><strong>Semantics / Behavior</strong></td>
+
+<td valign="top">
+<ul>
+<li><strong>มอง <code>Error</code> เป็นค่าข้อมูลปกติ</strong> ที่ถูกส่งคืนจากฟังก์ชันเหมือนการคืนค่าทั่วไปผ่านโครงสร้าง <code>Result&lt;T, E&gt;</code></li>
+
+<li><strong>ตัวดำเนินการ <code>?</code> ทำงานแบบ <code>Short-circuiting</code></strong> โดยหากประมวลผลแล้วเกิดข้อผิดพลาด ระบบจะทำการคืนค่าข้อผิดพลาดกลับไปยังฟังก์ชันผู้เรียกทันทีโดยอัตโนมัติ</li>
+
+<li><strong>คำสั่ง <code>panic!</code></strong> จะสั่งหยุดหน่วยการทำงานปัจจุบันทันทีเมื่อเกิดข้อผิดพลาดร้ายแรง โดยระบบจะถอยย้อน <code>Stack</code> เพื่อเคลียร์ตัวแปรและคืนทรัพยากร ก่อนปิดการทำงานลง</li>
+</ul>
+</td>
+
+<td valign="top">
+<ul>
+<li><strong>เมื่อคำสั่ง <code>throw</code> ทำงาน</strong> ระบบรันไทม์จะหยุดการประมวลผลในขอบเขต ปัจจุบันทันที และเริ่มกระบวนการถอยย้อน <code>Stack</code> โดยการยกเลิก <code>Stack Frame</code> ไล่ย้อนกลับไปตามลำดับการเรียกใช้งาน เพื่อค้นหาบล็อก <code>catch</code> ที่มีชนิดข้อมูลสอดคล้องกับวัตถุ <code>Exception</code> นั้นมาจัดการ</li>
+</ul>
+</td>
 </tr>
+
+<tr>
+<td valign="top"><strong>Type System</strong></td>
+
+<td valign="top">
+<ul>
+<li><strong>การแยกชนิดข้อมูล <code>T</code> และ <code>Option&lt;T&gt;</code></strong> โดยเป็นการแยกข้อมูลที่มีอยู่จริง (<code>T</code>) ออกจากข้อมูลที่อาจไม่มีอยู่ (<code>Option&lt;T&gt;</code>) อย่างเด็ดขาด ช่วยตัดปัญหา <code>Null Pointer Exception</code> ออกไปได้ตั้งแต่ขั้นตอนคอมไพล์</li>
+
+<li><strong>ตัวแปรจะอยู่ในสถานะใดสถานะหนึ่งได้เพียงอย่างเดียวในขณะนั้น</strong> เช่น <code>Option</code> (<code>Some</code> หรือ <code>None</code>) และ <code>Result</code> (<code>Ok</code> หรือ <code>Err</code>)</li>
+
+<li><strong>มีแอตทริบิวต์ <code>#[must_use]</code></strong> บังคับให้ผู้เขียนโปรแกรมต้องนำผลลัพธ์ไปจัดการต่อเสมอ หากละเลยคอมไพเลอร์จะแจ้งเตือนทันที</li>
+</ul>
+</td>
+
+<td valign="top">
+<ul>
+<li><strong>เป็นลำดับชั้นชนิดข้อมูล</strong> โดยระบบ <code>Type</code> ใน Java มีคลาสสูงสุดคือ <code>java.lang.Throwable</code> ซึ่งถูกจำแนกออกเป็น 2 ประเภทหลักคือ <code>java.lang.Error</code> (ข้อผิดพลาดรุนแรงในระดับ JVM ที่โปรแกรมไม่ควรจัดการ) และ <code>java.lang.Exception</code> (ข้อผิดพลาดจากลอจิกหรือปัจจัยภายนอกที่โปรแกรมสามารถดักจับได้)</li>
+
+<li><strong>มี <code>Checked Exceptions</code></strong> ซึ่งเป็น Exceptions ประเภทที่บังคับตรวจสอบหรือจัดการตอนคอมไพล์</li>
+
+<li><strong>บล็อก <code>catch (Exception e)</code></strong> สามารถดักจับ Exception ย่อยทุกตัวที่สืบทอดมาจากคลาส <code>Exception</code> ได้ทันทีตามหลัก <code>Polymorphism</code></li>
+</ul>
+</td>
+</tr>
+
+<tr>
+<td valign="top"><strong>Memory Management</strong></td>
+
+<td valign="top">
+<ul>
+<li><strong>คืนทรัพยากรอัตโนมัติด้วยหลัก <code>Ownership</code></strong> ทันทีที่ <code>Option</code> หรือ <code>Result</code> หมดขอบเขตการทำงาน (<code>Scope</code>)</li>
+
+<li><strong>มี <code>Null Pointer Optimization (NPO)</code></strong></li>
+
+<li><strong>ไม่มีการสร้าง <code>Overhead</code> บน <code>Heap</code></strong> เพราะโครงสร้าง <code>Enum</code> มีพฤติกรรมเป็น <code>Value Type</code> ซึ่งข้อมูลจะถูกประมวลผลและส่งผ่านบน <code>Stack</code></li>
+</ul>
+</td>
+
+<td valign="top">
+<ul>
+<li><strong>การใช้คำสั่ง <code>throw</code></strong> จะบังคับให้ JVM สร้างออบเจกต์ <code>Exception</code> ขึ้นบน <code>Heap Memory</code> พร้อมบันทึกลำดับขั้นตอนการเรียกใช้งานฟังก์ชัน (<code>Stack Trace</code>) ทำให้กินหน่วยความจำเพิ่มขึ้นและเกิด <code>Runtime Overhead</code></li>
+
+<li><strong>เมื่อจัดการ <code>Exception</code> ในบล็อก <code>catch</code> เสร็จสิ้น</strong> และไม่มีการใช้งานออบเจกต์นั้นต่อ ระบบ <code>Garbage Collector (GC)</code> ของ Java จะเข้ามาล้างออบเจกต์นั้นออกจาก <code>Heap Memory</code> และคืนพื้นที่ให้อัตโนมัติ</li>
+</ul>
+</td>
+</tr>
+
+<tr>
+<td valign="top"><strong>Safety</strong></td>
+
+<td valign="top">
+<ul>
+<li><strong>การันตีความปลอดภัยตั้งแต่ขั้นตอนคอมไพล์</strong> โดยคอมไพเลอร์จะบังคับให้โปรแกรมเมอร์ต้องเขียนโค้ดรองรับทุกกรณีของข้อผิดพลาดที่อาจเกิดขึ้นขณะรันโปรแกรม (<code>Runtime</code>) ไว้ล่วงหน้าเสมอ ทำให้โปรแกรมไม่ Crash โดยไม่ได้คาดคิด</li>
+
+<li><strong>การันตีการตรวจสอบครอบคลุมทุกกรณี</strong> โดยคอมไพเลอร์บังคับให้ต้องเขียนโค้ดรองรับทุก <code>Variant</code> ของ <code>Enum</code> (<code>Ok/Err</code> หรือ <code>Some/None</code>) ให้ครบถ้วน ป้องกันไม่ให้มีเงื่อนไขตกหล่น</li>
+
+<li><strong>การันตีว่า Error ไม่ถูกละเลย</strong> โดยคอมไพเลอร์บังคับให้ต้องจัดการค่า <code>Result</code> ที่คืนกลับมาเสมอ ไม่สามารถเรียกฟังก์ชันแล้วปล่อยผ่านไปเฉย ๆ ได้</li>
+
+<li><strong>ป้องกันความผิดพลาดของระบบด้วย <code>panic!</code></strong> โดยจะสั่งหยุดโปรแกรมทันทีเมื่อเกิด Bug ร้ายแรง เพื่อการันตีว่าระบบจะไม่ฝืนทำงานต่อด้วยข้อมูลที่ผิดพลาด</li>
+</ul>
+</td>
+
+<td valign="top">
+<ul>
+<li><strong>มีความเสี่ยงที่โปรแกรมจะเกิดการทำงานผิดพลาดและล่มลงในขณะที่ทำงานอยู่</strong> ถ้าไม่ได้เขียนบล็อก <code>catch</code> ดักจับไว้ให้ครอบคลุม Error นั้น</li>
+
+<li><strong>เสี่ยงเกิด <code>NullPointerException</code> ได้ง่าย</strong> เพราะคอมไพเลอร์บังคับตรวจจับเฉพาะ <code>Checked Exceptions</code> เท่านั้น</li>
+</ul>
+</td>
+</tr>
+
+</tbody>
 </table>
+
+
+
+<p><strong>หมายเหตุ:</strong> แบ่งการเปรียบเทียบออกเป็น 3 ตาราง เพื่อให้เนื้อหาไม่แน่นเกินไปและอ่านง่ายขึ้น โดยเปรียบเทียบ Rust กับ Java, Python และ Swift ตามลำดับ</p>
 
 ### Rust Example
 
