@@ -406,7 +406,6 @@ fn main() {
 **Correct Code**
 
 ```rust
-#[derive(Debug)]
 enum AppError {
     UserNotFound,
     DatabaseDown,
