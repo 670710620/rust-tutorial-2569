@@ -1305,7 +1305,13 @@ do {
 
 **Member 3**
 
-`[สิ่งที่รับผิดชอบ]`
+- วิเคราะห์เกี่ยวกับ Error Handling ในภาษา Rust ในมุมมองของ Programming Languages ในแต่ละหัวข้อ ได้แก่ Syntax, Semantics, Type System, Memory / Resource Management, Abstraction / Other PPL Concepts และ Why Rust?
+
+- เปรียบเทียบภาษา Rust กับ Java, Python และ Swift
+
+- ยกตัวอย่างโค้ดของทั้ง 4 ภาษาที่นำมาเปรียบเทียบกัน
+
+- วิเคราะห์ความแตกต่างที่สำคัญ และเหตุผลด้านการออกแบบภาษาของภาษา Rust, Java, Python และ Swift
 
 **Member 4**
 
