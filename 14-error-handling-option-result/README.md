@@ -12,7 +12,7 @@
 | # | Name | Student ID | GitHub Username | Main Responsibility |
 |---|---|---|---|---|
 | 1 | นายกันต์ธร บุตรเบ้า | 670710619 | `@[กรอก GitHub username]` | Concept + Short Code Illustration (สรุปแนวคิดหลัก + โค้ดตัวอย่างสั้น) |
-| 2 | นางสาวฉันทณัฏฐ วิชพันธุ์ | 670710620 | `@[กรอก GitHub username]` | Detailed Code + Live Demo (โค้ดเชิงลึก + สาธิตสด) |
+| 2 | นางสาวฉันทณัฏฐ วิชพันธุ์ | 670710620 | `@[670710620]` | Detailed Code + Live Demo (โค้ดเชิงลึก + สาธิตสด) |
 | 3 | นางสาวณัฐกฤตา บุญมี | 670710621 | `@[กรอก GitHub username]` | Rust vs Other Language + PPL Analysis (เปรียบเทียบภาษา + วิเคราะห์เชิง PPL) |
 | 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[670710622]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
 
@@ -342,7 +342,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 
 **Explanation**
 
-`ขั้นตอนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างfunction divide ที่มี return เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0.0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราเรียกใช้ค่าที่ตัวหารเป็น 2.0 และ 0.0  `
+`ส่วนแรกเราก็จะสร้าง ประเภทของ DivisionError สำหรับเป็นประเภท error จากนั้นสร้างfunction divide ที่มี return เป็น Result และรับพารามิเตอร์ 2 ตัว เป็น float ทั้งคู่ โดยในฟังก์ชันจะมีเงื่อนไขหาก denominator ที่รับมาเป็น 0.0 จะได้ error ซึ่ง error คือตัว DivisionError ที่เราสร้างไว้ตอนแรก และทำการระบุข้อความที่เราต้องการให้ขึ้นเมื่อตัวหารที่เราใส่เป็น 0.0 ดังตัวอย่างในส่วนของ main ที่เราเรียกใช้ค่าที่ตัวหารเป็น 2.0 และ 0.0  `
 
 ---
 ### Example 4 — `[Unwrap]`
@@ -350,6 +350,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 **Purpose:** `การใ้ช unwrap`
 
 ```rust
+use std::fs::File;
 fn main(){
     let f = File::open("hello.txt").unwrap();
 } 
@@ -371,6 +372,7 @@ called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, messa
 **Purpose:** `แสดงการใช้งาน expect`
 
 ```rust
+use std::fs::File;
 fn main(){
      let f = File::open("hello.txt").expect("Failed to open it ");
 } 
@@ -384,46 +386,11 @@ Failed to open it : Os { code: 2, kind: NotFound, message: "No such file or dire
 
 **Explanation**
 
-`การใช้ expect สามารถระบุข้อความที่เราต้องการลงไปได้ในกรณีที่ Error แล้ว`
+`การใช้ expect สามารถระบุข้อความที่เราต้องการลงเป็นข้อความที่ต้องการ error อย่าง code ตัวอย่างที่เราให้เปิดไฟล์ หาก error ก็ให้ขึ้นข้อความว่าเปิดไม่ได้ `
 
 ---
-### Example 6 — `[Error Propagation]`
 
-**Purpose:** `--`
-
-```rust
-fn read_username_from_file() -> Result<String, io::Error>{
-    let f = File::open("hello.txt"); 
-
-    let mut f = match f {
-        Ok(file) => file, 
-        Err(e) => return Err(e),
-    };
-
-    let mut s = String::new();
-
-    match f.read_to_string(&mut s){
-        Ok(_) => Ok(s),
-        Err(e) => Err(e),
-    }
-}
-fn main(){
-    ...
-} 
-```
-
-**Expected Output**
-
-```text
-[]
-```
-
-**Explanation**
-
-`[]`
-
----
-### Example 7 — `[? Operator]`
+### Example 6 — `[? Operator]`
 
 **Purpose:** `แสดงการใช้ ?`
 
@@ -447,7 +414,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 
 **Explanation**
 
-`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ? แทนการเขียน match ซึึ่งถ้าบรรทัดที่่ 2 สามารถคำนวนการหารผ่านได้ บรรทัดด่อมาที่เป็น Ok ก็จะทำงานต่อ แต่ถ้า Error บรรทัด Ok ก็จะไม่ถูกทำงาน  `
+`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ? แทนการเขียน match ซึ่งถ้าบรรทัดที่ 2 สามารถคำนวนการหารผ่านได้ บรรทัดด่อมาที่เป็น Ok ก็จะทำงานต่อ แต่ถ้า Error บรรทัด Ok ก็จะไม่ถูกทำงาน  `
 
 ---
 
@@ -1340,7 +1307,7 @@ do {
 > แนะนำให้มีอย่างน้อย **4 แหล่งอ้างอิง** และควรใช้เอกสารทางการเป็นหลัก
 
 1. `[The Rust Programming Language — Rust Book]`
-2. `[Rust by Example / Rust Reference]`
+2. `https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
 3. `[Official documentation ที่เกี่ยวข้องกับ Topic]`
 4. `[แหล่งอ้างอิงเพิ่มเติม]`
 
