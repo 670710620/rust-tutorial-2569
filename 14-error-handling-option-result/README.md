@@ -1372,10 +1372,10 @@ do {
 
 | Member | Issues | Commits | Pull Requests | Code Reviews | Contribution |
 |---|---:|---:|---:|---:|---|
-| Member 1 | `0` | `25` | `5` | `[จำนวน]` | `[รายละเอียด]` |
-| Member 2 | `0` | `17` | `2` | `[จำนวน]` | `[รายละเอียด]` |
-| Member 3 | `0` | `17` | `2` | `[จำนวน]` | `[รายละเอียด]` |
-| Member 4 | `0` | `7` | `1` | `[จำนวน]` | `[รายละเอียด]` |
+| Member 1 | `0` | `25` | `5` | `[จำนวน]` | `Introduction, Key Concepts` |
+| Member 2 | `0` | `17` | `2` | `[จำนวน]` | `Important Syntax/Rules, Runnable Code Examples` |
+| Member 3 | `0` | `17` | `2` | `[จำนวน]` | `PPL Perspective, Rust vs. Other Language` |
+| Member 4 | `0` | `7` | `1` | `[จำนวน]` | `Common Mistakes, Exercises` |
 
 ### Teamwork Reflection
 
@@ -1408,7 +1408,7 @@ do {
 - [ ] AI Usage Declaration
 - [ ] GitHub Contribution
 - [x] สมาชิกทั้ง 4 คนมีส่วนร่วม
-- [ ] สมาชิกทั้ง 4 คนพร้อมนำเสนอคนละ 5 นาที
+- [x] สมาชิกทั้ง 4 คนพร้อมนำเสนอคนละ 5 นาที
 - [ ] สมาชิกทุกคนสามารถอธิบาย Code ของกลุ่มได้
 
 ---
