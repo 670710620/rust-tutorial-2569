@@ -76,7 +76,7 @@ fn get_user(id: u32) -> Option<String> {
 }
 
 fn main() {
-    let result = get_user(1);
+    let _result = get_user(1);
 }
 ```
 
@@ -113,7 +113,7 @@ fn divide(a: i32,b: i32) -> Result<i32,String> {
 }
 
 fn main() {
-    let varaint_return = divide(10,2);
+    let _varaint_return = divide(10,2);
 }
 ```
 
@@ -141,11 +141,11 @@ fn main() {
 
 ```rust
 fn main() {
-  let varaint_return = divide(10,2); //ฟังก์ชันจาก 4.2
+    let variant: Result<String, String> = Result::Ok("hello world!".to_string());
 
-  match varaint_return {
-    Ok(value) => println!("Result: {value}"),
-    Err(error) => println!("Error: {error}"),
+    match variant {
+        Ok(value) => println!("Result: {value}"),
+        Err(_error) => println!("Error: something wrong"),
     }
 }
 ```
@@ -170,7 +170,14 @@ fn main() {
 
 ```rust
 fn calculate() -> Result<i32, String> {
-    return divide(10,0); //ฟังก์ชันจาก 4.2
+    match divide(10,0) { //ฟังก์ชันจาก 4.2
+        Ok(value) => {
+            println!("success!!");
+            return Ok(value);
+        },
+        Err(error) => return Err(error),
+        
+    }
 }
 
 fn main() {
@@ -201,7 +208,7 @@ fn  calculator() ->  Result<i32,String> {
     println!("Result is Ok, and continue this path");
     println!("value: {}", value);
 
-    Ok(value + 100)
+    return Ok(value + 100)
 }
 
 fn main() {
