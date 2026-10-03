@@ -14,7 +14,7 @@
 | 1 | นายกันต์ธร บุตรเบ้า | 670710619 | `@[กรอก GitHub username]` | Concept + Short Code Illustration (สรุปแนวคิดหลัก + โค้ดตัวอย่างสั้น) |
 | 2 | นางสาวฉันทณัฏฐ วิชพันธุ์ | 670710620 | `@[กรอก GitHub username]` | Detailed Code + Live Demo (โค้ดเชิงลึก + สาธิตสด) |
 | 3 | นางสาวณัฐกฤตา บุญมี | 670710621 | `@[กรอก GitHub username]` | Rust vs Other Language + PPL Analysis (เปรียบเทียบภาษา + วิเคราะห์เชิง PPL) |
-| 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[กรอก GitHub username]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
+| 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[670710622]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
 
 > แก้ไข GitHub Username ของแต่ละคนให้ตรงกับบัญชีจริงก่อนเริ่มทำงาน (ผู้สอนจะใช้คอลัมน์นี้เชิญเป็น collaborator ของ repository)
 
@@ -462,12 +462,14 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 **Incorrect Code**
 
 ```rust
-use std::fs;
+fn read_port(input: &str) -> u16 {
+    input.trim().parse().unwrap() // panics if input is not a valid number
+}
 
 fn main() {
-    let contents = fs::read_to_string("config.txt").unwrap();
-    let port: u16 = contents.trim().parse().unwrap();
+    let config = "8080"; // try changing this to "abc"
 
+    let port = read_port(config);
     println!("Starting server on port {}", port);
 }
 ```
@@ -475,21 +477,26 @@ fn main() {
 **Correct Code**
 
 ```rust
-use std::error::Error;
-use std::fs;
+use std::num::ParseIntError;
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string("config.txt")?;
-    let port: u16 = contents.trim().parse()?;
+fn read_port(input: &str) -> Result<u16, ParseIntError> {
+    let port: u16 = input.trim().parse()?; // returns Err to the caller instead of panicking
+    Ok(port)
+}
 
-    println!("Starting server on port {}", port);
-    Ok(())
+fn main() {
+    let config = "abc"; // try changing this to "abc"
+
+    match read_port(config) {
+        Ok(port) => println!("Starting server on port {}", port),
+        Err(e) => println!("Invalid config: {}", e),
+    }
 }
 ```
 
 **Why?**
 
-`เพราะ .unwrap() ตรวจเจอข้อผิดพลาดแล้ว panic จะทำการ crash โปรแกรม แต่ถ้าเราใช้ ? แทนนั้น Err จะถูกส่งกลับไปให้ caller เลือกวิธีจัดการ`
+`เพราะ .unwrap() ตรวจเจอข้อผิดพลาดแล้ว panic จะทำการ crash โปรแกรม แต่ถ้าเราใช้ ? แทนนั้น Errจะถูกส่งกลับไปให้ caller เลือกวิธีจัดการ`
 
 ---
 
@@ -497,7 +504,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 **Problem**
 
-`มือใหม่มักเช็กข้อผิดพลาดด้วยการดูข้อความ เช่น err.contains("not found") ซึ่งเปราะบางมาก เพราะข้อความ error เปลี่ยนได้ทุกเมื่อ เช่น แก้คำ แก้ภาษา หรือเปลี่ยนรูปแบบ พอข้อความเปลี่ยน โค้ดยังคอมไพล์ผ่านตามปกติ แต่เงื่อนไขที่เช็กไว้จะไม่ทำงานอีกต่อไปโดยไม่มีอะไรเตือนเลย`
+`Developer บางคนมักเช็กข้อผิดพลาดด้วยการดูข้อความ เช่น err.contains("not found") ซึ่งเปราะบางมาก เพราะข้อความ error เปลี่ยนได้ทุกเมื่อ เช่น แก้คำ แก้ภาษา หรือเปลี่ยนรูปแบบ พอข้อความเปลี่ยน โค้ดยังคอมไพล์ผ่านตามปกติ แต่เงื่อนไขที่เช็กไว้จะไม่ทำงานอีกต่อไปโดยไม่มีอะไรเตือนเลย`
 
 **Incorrect Code**
 
@@ -527,22 +534,23 @@ fn main() {
 **Correct Code**
 
 ```rust
-#[derive(Debug)]
 enum AppError {
     UserNotFound,
     DatabaseDown,
 }
 
 fn find_user(id: u32) -> Result<String, AppError> {
-    if id == 1 {
-        Ok("Alice".to_string())
-    } else {
-        Err(AppError::UserNotFound)
+    match id {
+        1 => Ok("Alice".to_string()),
+        99 => Err(AppError::DatabaseDown),
+        _ => Err(AppError::UserNotFound),
     }
 }
 
 fn main() {
-    match find_user(2) {
+    let id = 2; // try 1 (found), 2 (not found), 99 (database down)
+
+    match find_user(id) {
         Ok(name) => println!("Hello {}", name),
         Err(AppError::UserNotFound) => println!("Creating a new user..."),
         Err(AppError::DatabaseDown) => println!("Try again later"),
@@ -552,7 +560,7 @@ fn main() {
 
 **Why?**
 
-`การเช็ก error ด้วย String ทำให้โค้ดต้องไปพึ่งข้อความที่เขียนไว้ ซึ่งคอมไพเลอร์ไม่ได้ช่วยตรวจสอบตรงนี้ ถ้ามีการเปลี่ยนข้อความจาก user not found เป็น no such user โค้ดที่ใช้ตรวจจับ error ก็อาจไม่ทำงานโดยที่เราไม่รู้ตัว แต่ถ้าใช้ enum เราสามารถกำหนดประเภทของ error ไว้ชัดเจน ทำให้ Rust สามารถตรวจสอบผ่านระบบ type ได้
+`การเช็ก error ด้วย String ทำให้โค้ดต้องไปพึ่งพาข้อความที่เขียนไว้ ซึ่งคอมไพเลอร์ไม่ได้ช่วยตรวจสอบตรงนี้ ถ้ามีการเปลี่ยนข้อความจาก user not found เป็น no such user โค้ดที่ใช้ตรวจจับ error ก็อาจไม่ทำงานโดยที่เราไม่รู้ตัว แต่ถ้าใช้ enum เราสามารถกำหนดประเภทของ error ไว้ชัดเจน ทำให้ Rust สามารถตรวจสอบผ่านระบบ type ได้
 `
 
 ---
@@ -561,47 +569,98 @@ fn main() {
 
 > จัดทำแบบฝึกหัด **2 ข้อ** ที่สอดคล้องกับ Topic และมีระดับความยากเหมาะสม
 
-### Exercise 1 — `[ชื่อโจทย์]`
+### Exercise 1 — หาเลขคู่ตัวแรก (Option)
 
 **Problem**
 
-`[เขียนโจทย์]`
+เขียนฟังก์ชัน `first_even` ที่รับ slice ของ `i32` แล้วคืนค่าเลขคู่ตัวแรกที่พบ
+โดยมี return type เป็น `Option<i32>` (ถ้าไม่มีเลขคู่ให้คืน `None`)
+จากนั้นใน `main` ให้ใช้ `match` แสดงผลทั้งสองกรณี
 
 **Hint**
 
-`[คำใบ้]`
+ใช้ loop ตรวจทีละตัว ถ้า `n % 2 == 0` ให้ `return Some(n)` และถ้าจบ loop แล้วยังไม่เจอให้คืน `None`
 
 **Solution**
 
 ```rust
-// Solution code
+fn first_even(numbers: &[i32]) -> Option<i32> {
+    for &n in numbers {
+        if n % 2 == 0 {
+            return Some(n);
+        }
+    }
+    None
+}
+
+fn main() {
+    match first_even(&[1, 3, 4, 7]) {
+        Some(n) => println!("First even number: {}", n),
+        None => println!("No even number found."),
+    }
+
+    match first_even(&[1, 3, 5]) {
+        Some(n) => println!("First even number: {}", n),
+        None => println!("No even number found."),
+    }
+}
+```
+
+**Expected Output**
+
+```text
+First even number: 4
+No even number found.
 ```
 
 **Explanation**
 
-`[อธิบายแนวทางแก้]`
+ฟังก์ชันวนตรวจตัวเลขทีละตัว ถ้าเจอเลขคู่จะคืน `Some(n)` ทันที แต่ถ้าวนจนครบแล้วไม่เจอ จะคืน `None`
+ใน `main` เราใช้ `match` จัดการทั้ง 2 กรณี (`Some` / `None`) ซึ่ง Rust บังคับให้เราจัดการครบทุกกรณี จึงไม่มีโอกาสลืมเช็กกรณีที่ไม่มีค่า
 
 ---
 
-### Exercise 2 — `[ชื่อโจทย์]`
+### Exercise 2 — บวกเลขจากข้อความ (Result และ ?)
 
 **Problem**
 
-`[เขียนโจทย์]`
+เขียนฟังก์ชัน `add_strings` ที่รับข้อความ 2 ตัว (`&str`) แปลงเป็น `i32` แล้วคืนผลบวก
+โดยมี return type เป็น `Result<i32, ParseIntError>` และต้องใช้ `?` ในการส่ง error กลับ (ห้ามใช้ `unwrap`)
 
 **Hint**
 
-`[คำใบ้]`
+ใช้ `.parse::<i32>()?` กับข้อความแต่ละตัว ถ้าแปลงไม่ได้ `?` จะ return `Err` ออกจากฟังก์ชันให้อัตโนมัติ
+อย่าลืม `use std::num::ParseIntError;`
 
 **Solution**
 
 ```rust
-// Solution code
+use std::num::ParseIntError;
+
+fn add_strings(a: &str, b: &str) -> Result<i32, ParseIntError> {
+    let x = a.trim().parse::<i32>()?;
+    let y = b.trim().parse::<i32>()?;
+    Ok(x + y)
+}
+
+fn main() {
+    println!("{:?}", add_strings("10", "20"));
+    println!("{:?}", add_strings("10", "abc"));
+}
+```
+
+**Expected Output**
+
+```text
+Ok(30)
+Err(ParseIntError { kind: InvalidDigit })
 ```
 
 **Explanation**
 
-`[อธิบายแนวทางแก้]`
+`parse::<i32>()` คืนค่าเป็น `Result` ถ้าแปลงสำเร็จ `?` จะดึงค่าออกมาใช้ต่อ แต่ถ้าล้มเหลว (เช่น `"abc"`)
+`?` จะ return `Err` กลับไปให้ผู้เรียกทันที โดยบรรทัด `Ok(x + y)` จะไม่ถูกรัน
+วิธีนี้ปลอดภัยกว่า `unwrap` ที่จะทำให้โปรแกรม panic (ตรงกับ Common Mistake ข้อ 1)
 
 ---
 
