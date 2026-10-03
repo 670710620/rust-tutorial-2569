@@ -1301,7 +1301,8 @@ do {
 
 **Member 2**
 
-`รับผิดชอบหัวข้อที่ 5 Important Syntax/Rules และ หัวข้อที่ 6 Runnable Code Examples`
+`- รับผิดชอบหัวข้อที่ 5 Important Syntax/Rules และ หัวข้อที่ 6 Runnable Code Examples 
+ - อธิบายการทำงานของ Code ที่นำมายกตัวอย่าง `
 
 **Member 3**
 
@@ -1363,7 +1364,7 @@ do {
 
 **รายละเอียดการใช้ AI**
 
-`[อธิบายว่าใช้ AI ในขั้นตอนใด และสมาชิกตรวจสอบผลลัพธ์อย่างไร]`
+``
 
 ---
 
