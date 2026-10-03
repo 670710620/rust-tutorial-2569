@@ -222,6 +222,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 **Purpose:** `การใ้ช unwrap`
 
 ```rust
+use std::fs::File;
 fn main(){
     let f = File::open("hello.txt").unwrap();
 } 
@@ -243,6 +244,7 @@ called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, messa
 **Purpose:** `แสดงการใช้งาน expect`
 
 ```rust
+use std::fs::File;
 fn main(){
      let f = File::open("hello.txt").expect("Failed to open it ");
 } 
