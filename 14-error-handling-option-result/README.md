@@ -1306,7 +1306,8 @@ do {
 
 **Member 2**
 
-- อธิบายการทำงานของ Code ที่นำมายกตัวอย่าง 
+- อธิบายการทำงานของ Code ที่นำมายกตัวอย่าง
+- อธิบายผลลัพธ์ที่เกิดขึ้น
 
 **Member 3**
 
@@ -1368,8 +1369,8 @@ do {
 
 **รายละเอียดการใช้ AI**
 
- - ใช้ AI ในขั้นตอนการข้อมูลเกี่ยวกับหัวข้อ Error handing โดยตรวจสอบความถูกต้องจากการเปรียบเทียบข้อมูลที่ได้จากหลาย ๆ เว็บที่เกี่ยวข้อง <br>
- - ใช้ Chatgpt ในขั้นตอนสร้างโค้ด Python, Swift และใช้ Claude ในขั้นตอนการสร้างตัวอย่าง Common Mistakes โดยตรวจสอบความถูกต้องจากการนำโค้ดไปเปรียบเทียกับ Syntax ของภาษานั้น ๆ และนำไป compile ตรวจสอบว่าทำงานได้หรือไม่ <br>
+ - ใช้ AI ในขั้นตอนการหาข้อมูลเกี่ยวกับหัวข้อ Error handing โดยตรวจสอบความถูกต้องจากการเปรียบเทียบข้อมูลที่ได้จากหลาย ๆ เว็บที่เกี่ยวข้อง <br>
+ - ใช้ Chatgpt ในขั้นตอนสร้างโค้ด Python, Swift และใช้ Claude ในขั้นตอนการสร้าโค้ดตัวอย่าง Common Mistakes และออกแบบ Exercise โดยตรวจสอบความถูกต้องจากการนำโค้ดไปเปรียบเทียกับ Syntax ของภาษานั้น ๆ และนำไป compile ตรวจสอบว่าทำงานได้หรือไม่ <br>
  - ใช้ในขั้นตอนการตรวจสอบความถูกต้องของข้อมูลและcodeที่นำมาใช้ โดยตรวจสอบความถูกต้องผ่านการนำโค้ดไป compile และเช็คข้อมูลจากเว็บที่น่าเชื่ออีกครั้ง <br>
  - ใช้ในขั้นตอนปรับปรุงเนื้อหางานเขียน โดยตรวจสอบจากการอ่านประโยคที่ถูกแก้ไขว่าความหมายโดยรวมเปลี่ยนไหม <br>
  - ใช้ Chatgpt ในขั้นตอนเขียน Format ลงไฟล์ .md โดยตรวจสอบไฟล์หลังเขียนเสร็จว่าไฟล์มี Format ตรงตามที่ต้องการหรือไม่ <br>
@@ -1380,10 +1381,10 @@ do {
 
 | Member | Issues | Commits | Pull Requests | Code Reviews | Contribution |
 |---|---:|---:|---:|---:|---|
-| Member 1 | `0` | `25` | `5` | `[จำนวน]` | `Introduction, Key Concepts` |
-| Member 2 | `0` | `17` | `2` | `[จำนวน]` | `Important Syntax/Rules, Runnable Code Examples` |
-| Member 3 | `0` | `17` | `2` | `[จำนวน]` | `PPL Perspective, Rust vs. Other Language` |
-| Member 4 | `0` | `7` | `1` | `[จำนวน]` | `Common Mistakes, Exercises` |
+| Member 1 | `0` | `27` | `5` | `1` | `Introduction, Key Concepts` |
+| Member 2 | `0` | `25` | `2` | `1` | `Important Syntax/Rules, Runnable Code Examples` |
+| Member 3 | `0` | `17` | `2` | `1` | `PPL Perspective, Rust vs. Other Language` |
+| Member 4 | `0` | `8` | `1` | `1` | `Common Mistakes, Exercises` |
 
 ### Teamwork Reflection
 
@@ -1431,6 +1432,6 @@ do {
 
 **Submitted by:** `[Group 14]`
 
-**Date:** `[2026-10-03]`
+**Date:** `[2026-10-04]`
 
 *โครงสร้างเอกสารฉบับเต็ม (Key Concepts, Runnable Code Examples, Common Mistakes, Exercises, PPL Perspective, Rust vs Other Language, References, AI Usage Declaration, GitHub Contribution, Final Checklist) ให้ทำต่อจากจุดนี้ตาม Template หลักของวิชา (`rust_tutorial_template.md`) ที่แนบมากับใบมอบหมายงาน*
