@@ -1301,7 +1301,7 @@ do {
 
 **Member 2**
 
-`[สิ่งที่รับผิดชอบ]`
+`รับผิดชอบหัวข้อที่ 5 Important Syntax/Rules และ หัวข้อที่ 6 Runnable Code Examples`
 
 **Member 3**
 
@@ -1325,24 +1325,22 @@ do {
 
 > แนะนำให้มีอย่างน้อย **4 แหล่งอ้างอิง** และควรใช้เอกสารทางการเป็นหลัก
 
-1. `[The Rust Programming Language — Rust Book]`
-2. `https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
-3. `Rust by Example: Error Handling — https://doc.rust-lang.org/rust-by-example/error.html`
-4. `Rust Reference: Type Layout — https://doc.rust-lang.org/reference/type-layout.html`
-5. `Rust Standard Library: Option — https://doc.rust-lang.org/std/option/`
-6. `Rust Standard Library: Result — https://doc.rust-lang.org/std/result/`
-7. `Rust Standard Library: #[must_use] Attribute — https://doc.rust-lang.org/std/attribute.must_use.html`
-8. `The Rust Programming Language: Recoverable Errors with Result — https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
-9. `The Rust Programming Language — https://doc.rust-lang.org/book/title-page.html`
-10. `Rust by Example — https://doc.rust-lang.org/rust-by-example/index.html`
-11. `Python Documentation: Errors and Exceptions — https://docs.python.org/3/tutorial/errors.html`
-12. `Python Documentation: Exceptions — https://docs.python.org/3/reference/executionmodel.html#exceptions`
-13. `Python Documentation: Traceback Objects — https://docs.python.org/3/reference/datamodel.html#traceback-objects`
-14. `Python Documentation: The try Statement — https://docs.python.org/3/reference/compound_stmts.html#the-try-statement`
-15. `The Swift Programming Language: Error Handling — https://docs.swift.org/latest/documentation/the-swift-programming-language/errorhandling/`
-16. `Apple Developer Documentation: Error — https://developer.apple.com/documentation/swift/error`
-17. `Oracle Java Tutorials: Exceptions — https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html`
-18. `Java Language Specification: Chapter 11 — Exceptions — https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html`
+1. `Rust by Example: Error Handling — https://doc.rust-lang.org/rust-by-example/error.html`
+2. `Rust Reference: Type Layout — https://doc.rust-lang.org/reference/type-layout.html`
+3. `Rust Standard Library: Option — https://doc.rust-lang.org/std/option/`
+4. `Rust Standard Library: Result — https://doc.rust-lang.org/std/result/`
+5. `Rust Standard Library: #[must_use] Attribute — https://doc.rust-lang.org/std/attribute.must_use.html`
+6. `The Rust Programming Language: Recoverable Errors with Result — https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
+7. `The Rust Programming Language — https://doc.rust-lang.org/book/title-page.html`
+8. `Rust by Example — https://doc.rust-lang.org/rust-by-example/index.html`
+9. `Python Documentation: Errors and Exceptions — https://docs.python.org/3/tutorial/errors.html`
+10. `Python Documentation: Exceptions — https://docs.python.org/3/reference/executionmodel.html#exceptions`
+11. `Python Documentation: Traceback Objects — https://docs.python.org/3/reference/datamodel.html#traceback-objects`
+12. `Python Documentation: The try Statement — https://docs.python.org/3/reference/compound_stmts.html#the-try-statement`
+13. `The Swift Programming Language: Error Handling — https://docs.swift.org/latest/documentation/the-swift-programming-language/errorhandling/`
+14. `Apple Developer Documentation: Error — https://developer.apple.com/documentation/swift/error`
+15. `Oracle Java Tutorials: Exceptions — https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html`
+16. `Java Language Specification: Chapter 11 — Exceptions — https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html`
 
 ---
 
@@ -1358,7 +1356,7 @@ do {
 
 ### Declaration
 
-- [ ] Code ทุกส่วนที่นำเสนอได้รับการ Compile และทดสอบแล้ว
+- [x] Code ทุกส่วนที่นำเสนอได้รับการ Compile และทดสอบแล้ว
 - [ ] สมาชิกทุกคนสามารถอธิบาย Code ที่นำเสนอได้
 - [ ] ตรวจสอบข้อมูลจากแหล่งอ้างอิงที่น่าเชื่อถือแล้ว
 - [ ] ระบุการใช้ AI อย่างโปร่งใส
@@ -1396,16 +1394,16 @@ do {
 
 ## 15. Final Checklist
 
-- [ ] Learning Objectives ครบ 3–4 ข้อ
-- [ ] Key Concepts ครบถ้วน
-- [ ] Syntax / Rules
-- [ ] Runnable Code Examples
-- [ ] Code Compile และ Run ได้จริง
-- [ ] Common Mistakes
-- [ ] Exercises 2 ข้อ พร้อม Solutions
-- [ ] PPL Perspective
-- [ ] Rust vs Other Language
-- [ ] References อย่างน้อย 4 แหล่ง
+- [x] Learning Objectives ครบ 3–4 ข้อ
+- [x] Key Concepts ครบถ้วน
+- [x] Syntax / Rules
+- [x] Runnable Code Examples
+- [x] Code Compile และ Run ได้จริง
+- [x] Common Mistakes
+- [x] Exercises 2 ข้อ พร้อม Solutions
+- [x] PPL Perspective
+- [x] Rust vs Other Language
+- [x] References อย่างน้อย 4 แหล่ง
 - [ ] AI Usage Declaration
 - [ ] GitHub Contribution
 - [ ] สมาชิกทั้ง 4 คนมีส่วนร่วม
