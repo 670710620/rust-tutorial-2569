@@ -390,11 +390,24 @@ Failed to open it : Os { code: 2, kind: NotFound, message: "No such file or dire
 
 ---
 
-### Example 6 — `[? Operator]`
+### Example 6 — `[? Operator และ Error Propagation]`
 
-**Purpose:** `แสดงการใช้ ?`
+**Purpose:** `แสดงการใช้ ? และ  Error Propagation`
 
 ```rust
+#[derive(Debug)]
+struct DivisionError{
+    message: String,
+}
+fn divide(numerator: f64, denominator: f64) -> Result<f64, DivisionError>{
+    if denominator == 0.0 {
+        Err(DivisionError{
+            message: "Cannot divide by Zero ".to_string(),
+        })
+    }else {
+        Ok(numerator / denominator)
+    }
+}
 fn calculate_division_then_add_one(num: f64, den: f64)->Result<f64,DivisionError>{
     let result = divide(num, den)?;
     Ok(result +1.0)
@@ -414,7 +427,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 
 **Explanation**
 
-`ส่วนแรกก็จะเป็น function สำหรับการหารก่อนจะบวกเพิ่ม 1.0 โดยเราจะใช้ ? แทนการเขียน match ซึ่งถ้าบรรทัดที่ 2 สามารถคำนวนการหารผ่านได้ บรรทัดด่อมาที่เป็น Ok ก็จะทำงานต่อ แต่ถ้า Error บรรทัด Ok ก็จะไม่ถูกทำงาน  `
+`เราจะใช้ ? แทนการเขียน match ซึ่งถ้า function divide คืนค่าออกมาเป็น Ok result ใน function calculate_division_then_add_one จะถูกบวกเพิ่ม 1.0 แล้วคืนค่าส่งกลับไปให้ main แต่ถ้าคืนค่าออกมาเป็น Error บรรทัด Ok ใน  function calculate_division_then_add_one ก็จะไม่ถูกทำงาน และจะส่งค่า Error ที่ได้จาก  function divide กลับไปที่ function main แทน  `
 
 ---
 
