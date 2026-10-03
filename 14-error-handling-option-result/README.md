@@ -1301,8 +1301,8 @@ do {
 
 **Member 2**
 
-`- รับผิดชอบหัวข้อที่ 5 Important Syntax/Rules และ หัวข้อที่ 6 Runnable Code Examples 
- - อธิบายการทำงานของ Code ที่นำมายกตัวอย่าง `
+- รับผิดชอบหัวข้อที่ 5 Important Syntax/Rules และ หัวข้อที่ 6 Runnable Code Examples 
+- อธิบายการทำงานของ Code ที่นำมายกตัวอย่าง 
 
 **Member 3**
 
