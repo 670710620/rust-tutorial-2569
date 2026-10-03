@@ -11,9 +11,9 @@
 
 | # | Name | Student ID | GitHub Username | Main Responsibility |
 |---|---|---|---|---|
-| 1 | นายกันต์ธร บุตรเบ้า | 670710619 | `@670710619` | Concept + Short Code Illustration (สรุปแนวคิดหลัก + โค้ดตัวอย่างสั้น) |
+| 1 | นายกันต์ธร บุตรเบ้า | 670710619 | `@[670710619]` | Concept + Short Code Illustration (สรุปแนวคิดหลัก + โค้ดตัวอย่างสั้น) |
 | 2 | นางสาวฉันทณัฏฐ วิชพันธุ์ | 670710620 | `@[670710620]` | Detailed Code + Live Demo (โค้ดเชิงลึก + สาธิตสด) |
-| 3 | นางสาวณัฐกฤตา บุญมี | 670710621 | `@670710621` | Rust vs Other Language + PPL Analysis (เปรียบเทียบภาษา + วิเคราะห์เชิง PPL) |
+| 3 | นางสาวณัฐกฤตา บุญมี | 670710621 | `@[670710621]` | Rust vs Other Language + PPL Analysis (เปรียบเทียบภาษา + วิเคราะห์เชิง PPL) |
 | 4 | นายณัฐวีร์ บุญยินดี | 670710622 | `@[670710622]` | Exercises + Common Mistakes + Challenge (แบบฝึกหัด + ข้อผิดพลาดที่พบบ่อย + คำถามท้าทาย) |
 
 > แก้ไข GitHub Username ของแต่ละคนให้ตรงกับบัญชีจริงก่อนเริ่มทำงาน (ผู้สอนจะใช้คอลัมน์นี้เชิญเป็น collaborator ของ repository)
@@ -24,7 +24,7 @@
 
 หลังจากศึกษา Topic นี้แล้ว ผู้เรียนสามารถ:
 
-1. อธิบายแนวคิดการใช้งานของ Option,Result,match,Error Propagration และ ? operator ได้
+1. อธิบายแนวคิดการใช้งานของ Option,Result,match,Error Propagation และ ? operator ได้
 2. สามารถนำความรู้ไปเขียนโปรแกรมโ้วยภาษา Rust ที่มีการรับจัดการกับการไม่มีข้อมูลที่ต้องการหรือ ความล้มเหลวได้
 3. สามารถเข้าใจและวิเคราะห์พฤติกรรม จุดเด่น กฎของภาษาในการรับมือและจัดการ Error ในภาษา Rust เพื่อเขียนโปรแกรมได้อย่างถูกต้องและปลอดภัย
 4. เปรียบเทียบภาษา Rust กับ Java, Python, Swift และเห็นความแตกต่างที่สำคัญของแต่ละภาษาที่นำมาเปรียบเทียบกันได้
@@ -1416,14 +1416,14 @@ do {
 
 ## Submission Information
 
-**Repository:** `[GitHub repository URL]`
+**Repository:** `[https://github.com/soonklang/rust-tutorial-2569/tree/main/14-error-handling-option-result]`
 
-**Chapter Path:** `[เช่น chapters/01-introduction/]`
+**Chapter Path:** `[14-error-handling-option-result/]`
 
 **Final PR:** `#[PR number]`
 
-**Submitted by:** `[Group XX]`
+**Submitted by:** `[Group 14]`
 
-**Date:** `[YYYY-MM-DD]`
+**Date:** `[2026-10-03]`
 
 *โครงสร้างเอกสารฉบับเต็ม (Key Concepts, Runnable Code Examples, Common Mistakes, Exercises, PPL Perspective, Rust vs Other Language, References, AI Usage Declaration, GitHub Contribution, Final Checklist) ให้ทำต่อจากจุดนี้ตาม Template หลักของวิชา (`rust_tutorial_template.md`) ที่แนบมากับใบมอบหมายงาน*
