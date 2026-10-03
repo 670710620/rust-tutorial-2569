@@ -1308,8 +1308,22 @@ do {
 
 1. `[The Rust Programming Language — Rust Book]`
 2. `https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
-3. `[Official documentation ที่เกี่ยวข้องกับ Topic]`
-4. `[แหล่งอ้างอิงเพิ่มเติม]`
+3. `Rust by Example: Error Handling — https://doc.rust-lang.org/rust-by-example/error.html`
+4. `Rust Reference: Type Layout — https://doc.rust-lang.org/reference/type-layout.html`
+5. `Rust Standard Library: Option — https://doc.rust-lang.org/std/option/`
+6. `Rust Standard Library: Result — https://doc.rust-lang.org/std/result/`
+7. `Rust Standard Library: #[must_use] Attribute — https://doc.rust-lang.org/std/attribute.must_use.html`
+8. `The Rust Programming Language: Recoverable Errors with Result — https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html`
+9. `The Rust Programming Language — https://doc.rust-lang.org/book/title-page.html`
+10. `Rust by Example — https://doc.rust-lang.org/rust-by-example/index.html`
+11. `Python Documentation: Errors and Exceptions — https://docs.python.org/3/tutorial/errors.html`
+12. `Python Documentation: Exceptions — https://docs.python.org/3/reference/executionmodel.html#exceptions`
+13. `Python Documentation: Traceback Objects — https://docs.python.org/3/reference/datamodel.html#traceback-objects`
+14. `Python Documentation: The try Statement — https://docs.python.org/3/reference/compound_stmts.html#the-try-statement`
+15. `The Swift Programming Language: Error Handling — https://docs.swift.org/latest/documentation/the-swift-programming-language/errorhandling/`
+16. `Apple Developer Documentation: Error — https://developer.apple.com/documentation/swift/error`
+17. `Oracle Java Tutorials: Exceptions — https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html`
+18. `Java Language Specification: Chapter 11 — Exceptions — https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html`
 
 ---
 
