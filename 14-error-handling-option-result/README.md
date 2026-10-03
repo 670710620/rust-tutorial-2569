@@ -572,6 +572,8 @@ fn main() {
 
 ## 10. Rust vs. Other Language
 
+<p><strong>เปรียบเทียบภาษา Rust กับภาษา Java, Python และ Swift โดยแบ่งการเปรียบเทียบออกเป็น 3 ตาราง ดังนี้</strong></p>
+
 <h3>ตารางที่ 1: เปรียบเทียบ Rust และ Java</h3>
 
 <table>
