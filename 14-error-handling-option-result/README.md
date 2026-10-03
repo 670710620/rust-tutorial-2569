@@ -261,43 +261,8 @@ Failed to open it : Os { code: 2, kind: NotFound, message: "No such file or dire
 `การใช้ expect สามารถระบุข้อความที่เราต้องการลงไปได้ในกรณีที่ Error แล้ว`
 
 ---
-### Example 6 — `[Error Propagation]`
 
-**Purpose:** `--`
-
-```rust
-fn read_username_from_file() -> Result<String, io::Error>{
-    let f = File::open("hello.txt"); 
-
-    let mut f = match f {
-        Ok(file) => file, 
-        Err(e) => return Err(e),
-    };
-
-    let mut s = String::new();
-
-    match f.read_to_string(&mut s){
-        Ok(_) => Ok(s),
-        Err(e) => Err(e),
-    }
-}
-fn main(){
-    ...
-} 
-```
-
-**Expected Output**
-
-```text
-[]
-```
-
-**Explanation**
-
-`[]`
-
----
-### Example 7 — `[? Operator]`
+### Example 6 — `[? Operator]`
 
 **Purpose:** `แสดงการใช้ ?`
 
