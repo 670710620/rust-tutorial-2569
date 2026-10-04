@@ -447,7 +447,7 @@ fn read_port(input: &str) -> u16 {
 }
 
 fn main() {
-    let config = "8080"; // try changing this to "abc"
+    let config = "abc";
 
     let port = read_port(config);
     println!("Starting server on port {}", port);
@@ -465,7 +465,7 @@ fn read_port(input: &str) -> Result<u16, ParseIntError> {
 }
 
 fn main() {
-    let config = "abc"; // try changing this to "abc"
+    let config = "abc";
 
     match read_port(config) {
         Ok(port) => println!("Starting server on port {}", port),
