@@ -1321,8 +1321,10 @@ do {
 
 **Member 4**
 
-`[สิ่งที่รับผิดชอบ]`
+- ยกตัวอย่างโค้ดของ Common Mistakes
 
+- ออกแบบโจทย์ที่เกี่ยวกับหัวข้อของกลุ่ม
+ 
 > สมาชิกทุกคนต้องสามารถอธิบาย Code ของกลุ่มได้ ไม่ใช่เฉพาะส่วนที่ตนเองเขียน
 
 ---
@@ -1347,6 +1349,7 @@ do {
 14. `Apple Developer Documentation: Error — https://developer.apple.com/documentation/swift/error`
 15. `Oracle Java Tutorials: Exceptions — https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html`
 16. `Java Language Specification: Chapter 11 — Exceptions — https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html`
+17. `Rust Error Handling in 2026: Result, Option, and the ? Operator — https://rustify.rs/articles/rust-error-handling-result-option`
 
 ---
 
