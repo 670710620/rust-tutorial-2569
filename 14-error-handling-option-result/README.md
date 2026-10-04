@@ -1386,7 +1386,7 @@ do {
 |---|---:|---:|---:|---:|---|
 | Member 1 | `0` | `27` | `5` | `1` | `Introduction, Key Concepts` |
 | Member 2 | `0` | `25` | `2` | `1` | `Important Syntax/Rules, Runnable Code Examples` |
-| Member 3 | `0` | `17` | `2` | `1` | `PPL Perspective, Rust vs. Other Language` |
+| Member 3 | `0` | `32` | `2` | `1` | `PPL Perspective, Rust vs. Other Language` |
 | Member 4 | `0` | `9` | `1` | `1` | `Common Mistakes, Exercises` |
 
 ### Teamwork Reflection
