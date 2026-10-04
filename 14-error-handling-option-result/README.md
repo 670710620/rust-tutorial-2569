@@ -1384,8 +1384,8 @@ do {
 
 | Member | Issues | Commits | Pull Requests | Code Reviews | Contribution |
 |---|---:|---:|---:|---:|---|
-| Member 1 | `0` | `27` | `5` | `1` | `Introduction, Key Concepts` |
-| Member 2 | `0` | `25` | `2` | `1` | `Important Syntax/Rules, Runnable Code Examples` |
+| Member 1 | `0` | `30` | `5` | `1` | `Introduction, Key Concepts` |
+| Member 2 | `0` | `36` | `2` | `1` | `Important Syntax/Rules, Runnable Code Examples` |
 | Member 3 | `0` | `32` | `2` | `1` | `PPL Perspective, Rust vs. Other Language` |
 | Member 4 | `0` | `14` | `1` | `1` | `Common Mistakes, Exercises` |
 
@@ -1427,11 +1427,11 @@ do {
 
 ## Submission Information
 
-**Repository:** `[https://github.com/soonklang/rust-tutorial-2569/tree/main/14-error-handling-option-result]`
+**Repository:** `[https://github.com/670710620/rust-tutorial-2569/tree/main/14-error-handling-option-result]`
 
 **Chapter Path:** `[14-error-handling-option-result/]`
 
-**Final PR:** `#[38]`
+**Final PR:** `#[43]`
 
 **Submitted by:** `[Group 14]`
 
