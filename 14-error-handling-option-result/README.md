@@ -1387,7 +1387,7 @@ do {
 | Member 1 | `0` | `27` | `5` | `1` | `Introduction, Key Concepts` |
 | Member 2 | `0` | `25` | `2` | `1` | `Important Syntax/Rules, Runnable Code Examples` |
 | Member 3 | `0` | `17` | `2` | `1` | `PPL Perspective, Rust vs. Other Language` |
-| Member 4 | `0` | `8` | `1` | `1` | `Common Mistakes, Exercises` |
+| Member 4 | `0` | `9` | `1` | `1` | `Common Mistakes, Exercises` |
 
 ### Teamwork Reflection
 
@@ -1418,10 +1418,10 @@ do {
 - [x] Rust vs Other Language
 - [x] References อย่างน้อย 4 แหล่ง
 - [x] AI Usage Declaration
-- [ ] GitHub Contribution
+- [x] GitHub Contribution
 - [x] สมาชิกทั้ง 4 คนมีส่วนร่วม
 - [x] สมาชิกทั้ง 4 คนพร้อมนำเสนอคนละ 5 นาที
-- [ ] สมาชิกทุกคนสามารถอธิบาย Code ของกลุ่มได้
+- [x] สมาชิกทุกคนสามารถอธิบาย Code ของกลุ่มได้
 
 ---
 
