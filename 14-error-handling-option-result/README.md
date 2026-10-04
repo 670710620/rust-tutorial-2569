@@ -433,7 +433,7 @@ Err(DivisionError { message: "Cannot divide by Zero " })
 
 ## 7. Common Mistakes
 
-### Mistake 1 — `[Using .unwrap() in production code.]`
+### Mistake 1 — Using .unwrap() in production code
 
 **Problem**
 
@@ -480,7 +480,7 @@ fn main() {
 
 ---
 
-### Mistake 2 — `[Matching on error strings instead of error variants.]`
+### Mistake 2 — Matching on error strings instead of error variant
 
 **Problem**
 
